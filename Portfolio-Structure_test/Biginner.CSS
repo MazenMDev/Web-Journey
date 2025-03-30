@@ -23,6 +23,10 @@ h2 {
     border-radius: 8px;
 }
 
+h1, h2 {
+    transition: opacity 1s ease, transform 1s ease;
+}
+
 #project{
 	background-color: #F5ECD5;
 	color: #000000;
