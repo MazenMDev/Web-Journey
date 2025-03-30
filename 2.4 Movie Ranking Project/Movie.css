@@ -1,39 +1,22 @@
-<<<<<<<< HEAD:2.4 Movie Ranking Project/Movie.css
-body{
-	font-family: Arial, sans-serif;
-	background-color: #f4f4f4;
-	text-align: center;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
 }
-h1{
-	background-color:aliceblue
+
+h1 {
+    background-color: aliceblue;
 }
-h2{
-	background-color: aliceblue;
+
+h2 {
+    background-color: aliceblue;
 }
-h3{
-	background-color:blanchedalmond;
-	font-weight: 750;
+
+h3 {
+    background-color: blanchedalmond;
+    font-weight: 750;
 }
-p{
-	font-size:medium;
+
+p {
+    font-size: medium;
 }
-========
-body{
-	font-family: Arial, sans-serif;
-	background-color: #f4f4f4;
-	text-align: center;
-}
-h1{
-	background-color:aliceblue
-}
-h2{
-	background-color: aliceblue;
-}
-h3{
-	background-color:blanchedalmond;
-	font-weight: 750;
-}
-p{
-	font-size:medium;
-}
->>>>>>>> 4346fb656857fc087842b578b401fc2d07086b0e:Movie/Movie.css
