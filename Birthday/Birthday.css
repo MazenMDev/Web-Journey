@@ -40,15 +40,15 @@ a {
     background-color: #d6336c;
     color: white;
     text-decoration: none;
-    margin-top: 100px;
     padding: 10px 15px;
     border-radius: 20px;
     font-size: 18px;
-    display: inline-block; /* Allows margin-top to work */
-    margin-top: 15px;
+    display: inline-block;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 /* Changes background color when hovering over links */
 a:hover {
     background-color: #b82e5b;
+    transform: scale(1.1); /* Makes the link slightly bigger when hovered */
 }
