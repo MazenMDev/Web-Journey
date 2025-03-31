@@ -1,72 +1,81 @@
-body{
-	background-color: #FFFAEC;
-	font-family:cursive;
-	
+/* Sets the background color of the entire page and changes the font to cursive */
+body {
+    background-color: #FFFAEC;
+    font-family: cursive;
 }
 
-h1{
-	background-color: #578E7E;
-	color: aliceblue;
-	padding: 50px;
-	text-align: center;
-	border-radius: 10px;
+/* Styles for the main heading (h1) */
+h1 {
+    background-color: #578E7E; /* Greenish background */
+    color: aliceblue; /* Light text color */
+    padding: 50px; /* Adds space inside the h1 */
+    text-align: center; /* Centers the text */
+    border-radius: 10px; /* Rounds the corners */
 }
 
+/* Styles for subheadings (h2) */
 h2 {
-    text-align: center;
-    background-color: #578E7E;
-    padding: 15px;
-    margin: 20px auto;
-    font-weight: bolder;
-    font-size: 1.8em;
-    width: fit-content;
-    border-radius: 8px;
+    text-align: center; /* Centers the text */
+    background-color: #578E7E; /* Same greenish background as h1 */
+    padding: 15px; /* Adds space inside */
+    margin: 20px auto; /* Centers it horizontally */
+    font-weight: bolder; /* Makes the text bold */
+    font-size: 1.8em; /* Increases font size */
+    width: fit-content; /* Shrinks width to fit content */
+    border-radius: 8px; /* Slightly rounded corners */
 }
 
+/* Adds a smooth transition effect to h1 and h2 when opacity or position changes */
 h1, h2 {
     transition: opacity 1s ease, transform 1s ease;
 }
 
-#project{
-	background-color: #F5ECD5;
-	color: #000000;
-	text-align: center;
+/* Styles for the section with id "project" */
+#project {
+    background-color: #F5ECD5; /* Light beige background */
+    color: #000000; /* Black text */
+    text-align: center; /* Centers text */
 }
 
-#h{
-	background-color: #F5ECD5;
-	padding-bottom: 10px;
-	border-radius: 10px;
+/* Styles for the section with id "h" */
+#h {
+    background-color: #F5ECD5; /* Matches #project's background */
+    padding-bottom: 10px; /* Adds space at the bottom */
+    border-radius: 10px; /* Rounds the corners */
 }
 
-#list{
-	background-color: black;
-	padding-top: 10px;
-	border-radius: 10px;
-	padding-bottom: 500px;
+/* Styles for the section with id "list" */
+#list {
+    background-color: black; /* Black background */
+    padding-top: 10px; /* Space above content */
+    border-radius: 10px; /* Rounded corners */
+    padding-bottom: 500px; /* Adds a lot of space at the bottom */
 }
 
+/* Styles for unordered lists (ul) */
 ul {
-    background-color:#3D3D3D;
-    color: antiquewhite;
-    list-style: none;
-    display: flex;
-    padding: 20px;
-    justify-content: center;
-    border-radius: 10px;
-    margin: 20px auto;
+    background-color: #3D3D3D; /* Dark gray background */
+    color: antiquewhite; /* Light-colored text */
+    list-style: none; /* Removes default bullets */
+    display: flex; /* Makes list items appear in a row */
+    padding: 20px; /* Adds space inside the list */
+    justify-content: center; /* Centers the list items */
+    border-radius: 10px; /* Rounds the corners */
+    margin: 20px auto; /* Centers the list horizontally */
 }
 
-li{
-	margin: 10px 70px;
-	font-size:larger;
-    transition: background-color 0.3s, color 0.3s, padding 0.4s, border-radius 0.3s;
+/* Styles for each list item (li) */
+li {
+    margin: 10px 70px; /* Adds space between items */
+    font-size: larger; /* Increases text size */
+    transition: background-color 0.3s, color 0.3s, padding 0.4s, border-radius 0.3s; /* Adds smooth hover effect */
 }
 
+/* Hover effect for list items */
 li:hover {
-    background-color: #2a2929;
-    color: white;
-	border-radius: 5px;
-	padding: 10px;
-	cursor: pointer;
+    background-color: #2a2929; /* Darkens background on hover */
+    color: white; /* Changes text color to white */
+    border-radius: 5px; /* Slightly rounds corners */
+    padding: 10px; /* Increases padding for a pop effect */
+    cursor: pointer; /* Changes cursor to pointer */
 }
