@@ -1,18 +1,27 @@
-body{
-	font-family: Arial, sans-serif;
-	background-color: #f4f4f4;
-	text-align: center;
+/* Sets the overall font and background for the page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
 }
-h1{
-	background-color:aliceblue
+
+/* Styles for the main heading */
+h1 {
+    background-color: aliceblue;
 }
-h2{
-	background-color: aliceblue;
+
+/* Styles for the subheading */
+h2 {
+    background-color: aliceblue;
 }
-h3{
-	background-color:blanchedalmond;
-	font-weight: 750;
+
+/* Styles for section headings */
+h3 {
+    background-color: blanchedalmond;
+    font-weight: 750;
 }
-p{
-	font-size:medium;
+
+/* Sets the font size for paragraphs */
+p {
+    font-size: medium;
 }
