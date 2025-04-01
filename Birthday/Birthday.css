@@ -28,6 +28,7 @@ li {
     margin: 5px auto;
     border-radius: 30px;
     box-shadow: 2px 2px 10px #555;
+    user-select: none; /* Prevents text selection */
 }
 
 /* Changes background color when hovering over list items */
@@ -45,10 +46,11 @@ a {
     font-size: 18px;
     display: inline-block;
     transition: transform 0.3s ease, background-color 0.3s ease;
+    user-select: none; /* Prevents text selection */
 }
 
 /* Changes background color when hovering over links */
 a:hover {
     background-color: #b82e5b;
-    transform: scale(1.1); /* Makes the link slightly bigger when hovered */
+    transform: scale(1.1);
 }
