@@ -1,0 +1,24 @@
+.structure{
+    background-color: red;
+    height: 400px;
+    width: 400px;
+    position: relative;
+}
+
+.structure > .height{
+    background-color: white;
+    height: 150px;
+    width: 50px;
+    position: absolute;
+    left: 175px;
+    top: 125px;
+}
+
+.structure > .width{
+    background-color: white;
+    height: 50px;
+    width: 150px;
+    position: absolute;
+    left: 125px;
+    top: 175px;
+}
