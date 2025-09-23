@@ -3,31 +3,197 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My first webpage</title>
+    <title>Calculator</title>
+    <link rel="stylesheet" href="play.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        user-select: none;
+      }
+
+      .background {
+        background-color: rgb(248, 248, 248);
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+        height: 500px;
+        width: 300px;
+        border-radius: 20px;
+        padding: 15px;
+        box-sizing: border-box;
+      }
+
+      .screen {
+        background-color: #484848;
+        height: 80px;
+        width: 100%;
+        border-radius: 20px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end; /* numbers on the right */
+        padding: 0 15px;
+        box-sizing: border-box;
+        font-size: 2rem;
+        color: white;
+        font-family: "Roboto Mono", monospace;
+        overflow: hidden;
+      }
+
+      .rows {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .r {
+        display: flex;
+      }
+      .button {
+        display: flex;
+        background-color: #3c3a3a;
+        border-radius: 50%;
+        height: 55px;
+        width: 55px;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+      .button:hover {
+        background-color: rgb(78, 79, 79);
+        cursor: pointer;
+      }
+      .button:active {
+        transform: scale(0.95);
+      }
+      .col > div {
+        display: flex;
+        background-color: orange;
+        border-radius: 50%;
+        height: 55px;
+        width: 55px;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        margin-bottom: 10px;
+        margin-left: 15px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+      .other > div {
+        background-color: #484848;
+      }
+      .other > div:hover {
+        background-color: #7a7979;
+      }
+      .col > div:hover {
+        background-color: rgb(239, 162, 18);
+      }
+      .col > div:active {
+        transform: scale(0.95);
+      }
+
+      .keypad {
+        display: flex;
+        align-items: flex-end;
+        height: calc(100% - 100px);
+      }
+    </style>
   </head>
   <body>
-    <h1>Here we go</h1>
-    <h2>Here we go</h2>
-    <h3>Here we go</h3>
-    <h4>Here we go</h4>
+    <div class="background">
+      <div class="container">
+        <div class="screen"></div>
+        <div class="keypad">
+          <div class="rows">
+            <div class="r other">
+              <div class="button">del</div>
+              <div class="button">AC</div>
+              <div class="button">%</div>
+            </div>
+            <div class="r row-three">
+              <div class="button">7</div>
+              <div class="button">8</div>
+              <div class="button">9</div>
+            </div>
+            <div class="r row-two">
+              <div class="button">4</div>
+              <div class="button">5</div>
+              <div class="button">6</div>
+            </div>
+            <div class="r row-one">
+              <div class="button">1</div>
+              <div class="button">2</div>
+              <div class="button">3</div>
+            </div>
+            <div class="r row-four">
+              <div class="button">#</div>
+              <div class="button">0</div>
+              <div class="button">.</div>
+            </div>
+          </div>
+          <div class="col">
+            <div>/</div>
+            <div>*</div>
+            <div>-</div>
+            <div>+</div>
+            <div>=</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const screen = document.querySelector(".screen");
+      const buttons = document.querySelectorAll(".button, .col div");
 
-    <a href="html-css-course-master/udemy.com"> Udemy </a>
+      let check = false;
 
-    <aside>
-      <h4>Related posts</h4>
-      <ul>
-        <li>
-          <img
-            src="./html-css-course-master/html-css-course-master/starter/02-HTML-Fundamentals/related-1.jpg"
-            width="100"
-            height="100"
-          />
-          <a href="#">How to learn web development</a>
-          <p>by joter and the other team</p>
-        </li>
-      </ul>
-    </aside>
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const value = button.textContent;
 
-    <footer>Copyright &copy; by the Code Magazine</footer>
+          if (value === "AC") {
+            screen.textContent = ""; // clear screen
+            check = false;
+          } else if (value === "del") {
+            screen.textContent = screen.textContent.slice(0, -1); // delete last char
+          } else if (value === "=") {
+            try {
+              screen.textContent = eval(screen.textContent); // calculate expression
+              check = true;
+            } catch {
+              screen.textContent = "Error";
+              check = true;
+            }
+          } else {
+            if (check == true) {
+              screen.textContent = value;
+              check = false;
+            } else {
+              screen.textContent += value; // add pressed button
+            }
+          }
+        });
+      });
+    </script>
   </body>
 </html>
