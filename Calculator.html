@@ -2,167 +2,198 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link href="test.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="play.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        user-select: none;
+      }
 
-    <title>The Basic Language of the Web: HTML</title>
+      .background {
+        background-color: rgb(248, 248, 248);
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+        height: 500px;
+        width: 300px;
+        border-radius: 20px;
+        padding: 15px;
+        box-sizing: border-box;
+      }
+
+      .screen {
+        background-color: #484848;
+        height: 80px;
+        width: 100%;
+        border-radius: 20px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end; /* numbers on the right */
+        padding: 0 15px;
+        box-sizing: border-box;
+        font-size: 2rem;
+        color: white;
+        font-family: "Roboto Mono", monospace;
+        overflow: hidden;
+      }
+
+      .rows {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .r {
+        display: flex;
+      }
+      .button {
+        display: flex;
+        background-color: #3c3a3a;
+        border-radius: 50%;
+        height: 55px;
+        width: 55px;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+      .button:hover {
+        background-color: rgb(78, 79, 79);
+        cursor: pointer;
+      }
+      .button:active {
+        transform: scale(0.95);
+      }
+      .col > div {
+        display: flex;
+        background-color: orange;
+        border-radius: 50%;
+        height: 55px;
+        width: 55px;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        margin-bottom: 10px;
+        margin-left: 15px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+      .other > div {
+        background-color: #484848;
+      }
+      .other > div:hover {
+        background-color: #7a7979;
+      }
+      .col > div:hover {
+        background-color: rgb(239, 162, 18);
+      }
+      .col > div:active {
+        transform: scale(0.95);
+      }
+
+      .keypad {
+        display: flex;
+        align-items: flex-end;
+        height: calc(100% - 100px);
+      }
+    </style>
   </head>
-
   <body>
-    <!--
-    <h1>The Basic Language of the Web: HTML</h1>
-    <h2>The Basic Language of the Web: HTML</h2>
-    <h3>The Basic Language of the Web: HTML</h3>
-    <h4>The Basic Language of the Web: HTML</h4>
-    <h5>The Basic Language of the Web: HTML</h5>
-    <h6>The Basic Language of the Web: HTML</h6>
-    -->
-
-    <div class="container">
-      <header class="main-header">
-        <h1>📘 The Code Magazine</h1>
-
-        <nav>
-          <!-- <strong>This is the navigation</strong> -->
-          <a href="blog.html">Blog</a>
-          <a href="#">Challenges</a>
-          <a href="#">Flexbox</a>
-          <a href="#">CSS Grid</a>
-        </nav>
-      </header>
-
-      <article>
-        <header class="post-header">
-          <h2>The Basic Language of the Web: HTML</h2>
-
-          <img
-            src="img/laura-jones.jpg"
-            alt="Headshot of Laura Jones"
-            height="50"
-            width="50"
-            class="author-img"
-            ;
-          />
-
-          <p id="author" class="author">
-            Posted by <strong>Laura Jones</strong> on Monday, June 21st 2027
-          </p>
-
-          <img
-            src="img/post-img.jpg"
-            alt="HTML code on a screen"
-            width="500"
-            height="200"
-            class="post-img"
-          />
-          <button>❤️ Like</button>
-        </header>
-
-        <p>
-          All modern websites and web applications are built using three
-          <em>fundamental</em>
-          technologies: HTML, CSS and JavaScript. These are the languages of the
-          web.
-        </p>
-
-        <p>
-          In this post, let's focus on HTML. We will learn what HTML is all
-          about, and why you too should learn it.
-        </p>
-
-        <h3>What is HTML?</h3>
-        <p>
-          HTML stands for <strong>H</strong>yper<strong>T</strong>ext
-          <strong>M</strong>arkup <strong>L</strong>anguage. It's a markup
-          language that web developers use to structure and describe the content
-          of a webpage (not a programming language).
-        </p>
-        <p>
-          HTML consists of elements that describe different types of content:
-          paragraphs, links, headings, images, video, etc. Web browsers
-          understand HTML and render HTML code as websites.
-        </p>
-        <p>In HTML, each element is made up of 3 parts:</p>
-
-        <ol>
-          <li class="first-li">The opening tag</li>
-          <li>The closing tag</li>
-          <li>The actual element</li>
-        </ol>
-
-        <p>
-          You can learn more at
-          <a
-            href="https://developer.mozilla.org/en-US/docs/Web/HTML"
-            target="_blank"
-            >MDN Web Docs</a
-          >.
-        </p>
-
-        <h3>Why should you learn HTML?</h3>
-
-        <p>
-          There are countless reasons for learning the fundamental language of
-          the web. Here are 5 of them:
-        </p>
-
-        <ul>
-          <li class="first-li">
-            To be able to use the fundamental web dev language
-          </li>
-          <li>
-            To hand-craft beautiful websites instead of relying on tools like
-            Worpress or Wix
-          </li>
-          <li>To build web applications</li>
-          <li>To impress friends</li>
-          <li>To have fun 😃</li>
-        </ul>
-
-        <p>Hopefully you learned something new here. See you next time!</p>
-      </article>
-
-      <aside>
-        <h4>Related posts</h4>
-
-        <ul class="related">
-          <li>
-            <img
-              src="img/related-1.jpg"
-              alt="Person programming"
-              width="75"
-              height="75"
-            />
-            <a href="#">How to Learn Web Development</a>
-            <p class="related-author">By Jonas Schmedtmann</p>
-          </li>
-          <li>
-            <img
-              src="img/related-2.jpg"
-              alt="Lightning"
-              width="75"
-              height="75"
-            />
-            <a href="#">The Unknown Powers of CSS</a>
-            <p class="related-author">By Jim Dillon</p>
-          </li>
-          <li>
-            <img
-              src="img/related-3.jpg"
-              alt="JavaScript code on a screen"
-              width="75"
-              height="75"
-            />
-            <a href="#">Why JavaScript is Awesome</a>
-            <p class="related-author">By Matilda</p>
-          </li>
-        </ul>
-      </aside>
-
-      <footer>
-        <p id="copyright" class="copyright text">
-          Copyright &copy; 2027 by The Code Magazine.
-        </p>
-      </footer>
+    <div class="background">
+      <div class="container">
+        <div class="screen"></div>
+        <div class="keypad">
+          <div class="rows">
+            <div class="r other">
+              <div class="button">del</div>
+              <div class="button">AC</div>
+              <div class="button">%</div>
+            </div>
+            <div class="r row-three">
+              <div class="button">7</div>
+              <div class="button">8</div>
+              <div class="button">9</div>
+            </div>
+            <div class="r row-two">
+              <div class="button">4</div>
+              <div class="button">5</div>
+              <div class="button">6</div>
+            </div>
+            <div class="r row-one">
+              <div class="button">1</div>
+              <div class="button">2</div>
+              <div class="button">3</div>
+            </div>
+            <div class="r row-four">
+              <div class="button">#</div>
+              <div class="button">0</div>
+              <div class="button">.</div>
+            </div>
+          </div>
+          <div class="col">
+            <div>/</div>
+            <div>*</div>
+            <div>-</div>
+            <div>+</div>
+            <div>=</div>
+          </div>
+        </div>
+      </div>
     </div>
+    <script>
+      const screen = document.querySelector(".screen");
+      const buttons = document.querySelectorAll(".button, .col div");
+
+      let check = false;
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const value = button.textContent;
+
+          if (value === "AC") {
+            screen.textContent = ""; // clear screen
+            check = false;
+          } else if (value === "del") {
+            screen.textContent = screen.textContent.slice(0, -1); // delete last char
+          } else if (value === "=") {
+            try {
+              screen.textContent = eval(screen.textContent); // calculate expression
+              check = true;
+            } catch {
+              screen.textContent = "Error";
+              check = true;
+            }
+          } else {
+            if (check == true) {
+              screen.textContent = value;
+              check = false;
+            } else {
+              screen.textContent += value; // add pressed button
+            }
+          }
+        });
+      });
+    </script>
   </body>
 </html>
