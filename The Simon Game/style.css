@@ -1,0 +1,45 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f1f3f5;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: 200px 200px;
+  grid-template-rows: 200px 200px;
+  gap: 30px;
+  justify-content: center;
+  align-content: center;
+  height: 80vh;
+}
+
+#btn {
+  height: 200px;
+  width: 200px;
+  border-radius: 20px;
+  border: 5px solid black;
+}
+
+.green {
+  background-color: green;
+}
+.red {
+  background-color: red;
+}
+.blue {
+  background-color: blue;
+}
+.yellow {
+  background: yellow;
+}
+
+h1 {
+  justify-self: center;
+  font-size: 48px;
+  font-family: cursive;
+}
