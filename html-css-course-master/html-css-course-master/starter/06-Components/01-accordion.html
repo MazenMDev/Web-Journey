@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accordion component</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /*
+      SPACING SYSTEM (px)
+      2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+
+      FONT SIZE SYSTEM (px)
+      10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+      */
+
+      /*
+      MAIN COLOR: #087f5b
+      GREY COLOR: #343a40
+      */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* ------------------------ */
+      /* GENERAL STYLES */
+      /* ------------------------ */
+      body {
+        font-family: "Inter", sans-serif;
+        color: #343a40;
+        line-height: 1;
+      }
+
+      .accordion {
+        width: 700px;
+        margin: 100px auto;
+
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        user-select: none;
+        cursor: pointer;
+      }
+
+      .item {
+        box-shadow: 0 0 32px rgba(0, 0, 0, 0.1);
+        padding: 24px;
+
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        column-gap: 24px;
+        row-gap: 32px;
+        align-items: center;
+      }
+
+      .number,
+      .text {
+        font-size: 24px;
+        font-weight: 500;
+        /* color: #087f5b; */
+      }
+      .number {
+        color: rgb(152, 156, 158);
+      }
+      .icon {
+        width: 24px;
+        height: 24px;
+        stroke: #087f5b;
+      }
+      .hidden-box p {
+        line-height: 1.6;
+        margin-bottom: 24px;
+      }
+
+      .hidden-box ul {
+        color: #868e96;
+        margin-left: 20px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .open {
+        border-top: 5px solid #087f5b;
+      }
+
+      .hidden-box {
+        grid-column: 2;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: all 0.2s ease;
+      }
+
+      .open > .hidden-box {
+        max-height: 500px; /* enough space for content */
+        opacity: 1; /* fade in */
+      }
+      .open > .number,
+      .open > .text {
+        color: #087f5b;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="accordion">
+      <!-- First one -->
+      <div class="item">
+        <p class="number">01</p>
+        <p class="text">Where are these chairs assembled?</p>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="icon"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        <div class="hidden-box">
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla,
+            quasi officiis? Nostrum ad, sunt repellendus non expedita cum ipsum
+            beatae libero modi, nesciunt sit voluptas. Voluptate quod obcaecati
+            nobis ipsam?
+          </p>
+          <ul>
+            <li>Lorem ipsum dolor sit amet.</li>
+            <li>Consectetur adipisicing elit.</li>
+            <li>Quasi officiis? Nostrum ad.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Second one -->
+      <div class="item open">
+        <p class="number">02</p>
+        <p class="text">How long do I have to return my chairs?</p>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="icon"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        <div class="hidden-box">
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla,
+            quasi officiis? Nostrum ad, sunt repellendus non expedita cum ipsum
+            beatae libero modi, nesciunt sit voluptas. Voluptate quod obcaecati
+            nobis ipsam?
+          </p>
+          <ul>
+            <li>Lorem ipsum dolor sit amet.</li>
+            <li>Consectetur adipisicing elit.</li>
+            <li>Quasi officiis? Nostrum ad.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Third one -->
+      <div class="item">
+        <p class="number">03</p>
+        <p class="text">Do you ship to countries outside the EU?</p>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="icon"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        <div class="hidden-box">
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla,
+            quasi officiis? Nostrum ad, sunt repellendus non expedita cum ipsum
+            beatae libero modi, nesciunt sit voluptas. Voluptate quod obcaecati
+            nobis ipsam?
+          </p>
+          <ul>
+            <li>Lorem ipsum dolor sit amet.</li>
+            <li>Consectetur adipisicing elit.</li>
+            <li>Quasi officiis? Nostrum ad.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script>
+      const items = document.querySelectorAll(".item");
+      items.forEach((item) => {
+        item.addEventListener("click", () => {
+          if (item.classList.contains("open")) {
+            item.classList.remove("open");
+            return;
+          }
+          items.forEach((otherItem) => {
+            if (otherItem !== item) otherItem.classList.remove("open");
+          });
+          setTimeout(() => {
+            item.classList.add("open");
+          }, 200);
+        });
+      });
+    </script>
+  </body>
+</html>
