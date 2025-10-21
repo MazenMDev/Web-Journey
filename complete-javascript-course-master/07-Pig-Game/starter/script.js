@@ -123,6 +123,6 @@ newBtn.addEventListener('click', function () {
   namePlayer2.style.backgroundColor = 'transparent';
   namePlayer2.style.color = '#fff';
   namePlayer2.style.borderRadius = '0px';
-  namePlayer2.style.padding = '0px';
+  namePlayer2.style.padding = '0px'; 
   document.querySelector('.dice').src = `dice-1.png`;
 });
