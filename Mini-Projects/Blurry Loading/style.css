@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css?family=Ubuntu");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Ubuntu", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  background-color: #111;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  background: url("/complete-javascript-course-master/16-Asynchronous/final/img/img-1.jpg")
+    no-repeat center center/cover;
+  z-index: -1;
+  filter: blur(0px);
+}
+
+.loading-text {
+  font-size: 50px;
+  color: #fff;
+  z-index: 1;
+  opacity: 1;
+}
