@@ -1,0 +1,262 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Life Chart</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 20px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(
+          36,
+          20px
+        ); /* 36 months = 3 years per row */
+        grid-gap: 4px;
+        justify-content: center;
+      }
+
+      .circle {
+        width: 18px;
+        height: 18px;
+        border: 1px solid #555;
+        border-radius: 50%;
+        background: white;
+      }
+
+      .filled {
+        background: dodgerblue; /* highlight till 18 years */
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Life in Months</h2>
+    <p>Each row = 3 years (36 months)</p>
+
+    <div class="grid" id="lifeGrid"></div>
+
+    <script>
+      const totalMonths = 90 * 12; // 90 years
+      const monthsLived = 18 * 12; // 18 years
+      const grid = document.getElementById("lifeGrid");
+
+      for (let i = 1; i <= totalMonths; i++) {
+        const circle = document.createElement("div");
+        circle.classList.add("circle");
+        if (i <= monthsLived) {
+          circle.classList.add("filled");
+        }
+        grid.appendChild(circle);
+      }
+    </script>
+  </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: sans-serif;
+        line-height: 1.4;
+      }
+
+      /* PRODUCT */
+      .product {
+        border: 4px solid black;
+        width: 825px;
+        margin: 50px auto;
+        position: relative;
+      }
+
+      .product-title {
+        text-align: center;
+        font-size: 22px;
+        text-transform: uppercase;
+        background-color: #f7f7f7;
+        padding: 15px;
+      }
+
+      /* PRODUCT INFORMATION */
+      .price {
+        font-size: 24px;
+      }
+
+      .shipping {
+        font-size: 12px;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: #777;
+        margin-bottom: 20px;
+      }
+
+      .sale {
+        background-color: #ec2f2f;
+        color: #fff;
+        font-size: 12px;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 2px;
+        padding: 7px 15px;
+        display: inline-block;
+        position: absolute;
+        top: -17px;
+        left: -38px;
+
+        /*   width: 40px;
+  text-align: center; */
+      }
+
+      .more-info:link,
+      .more-info:visited {
+        color: black;
+        margin-bottom: 30px;
+        display: inline-block;
+      }
+
+      .more-info:hover,
+      .more-info:active {
+        text-decoration: none;
+      }
+
+      .color {
+        background-color: #000;
+        height: 22px;
+        width: 22px;
+        display: inline-block;
+        margin-right: 10px;
+      }
+
+      .color-blue {
+        background-color: #2f6ee2;
+      }
+      .color-red {
+        background-color: #ec2f2f;
+      }
+      .color-yellow {
+        background-color: #f0bf1e;
+      }
+      .color-green {
+        background-color: #90cc20;
+      }
+      .color-brown {
+        background-color: #885214;
+      }
+
+      /* PRODUCT DETAILS */
+      .details-title {
+        text-transform: uppercase;
+        font-size: 16px;
+        margin-bottom: 15px;
+        margin-top: 30px;
+      }
+
+      .details-list {
+        list-style: square;
+        margin-left: 20px;
+      }
+
+      .details-list li {
+        margin-bottom: 10px;
+      }
+
+      /* BUTTON */
+      .add-cart {
+        background-color: #000;
+        border: none;
+        color: #fff;
+        font-size: 20px;
+        text-transform: uppercase;
+        cursor: pointer;
+        padding: 15px;
+        width: 100%;
+        border-top: 4px solid black;
+      }
+
+      .add-cart:hover {
+        color: #000;
+        background-color: #fff;
+      }
+      .first {
+        float: left;
+      }
+      .second {
+        width: 250px;
+        float: left;
+        margin-left: 50px;
+      }
+      .price {
+        float: left;
+      }
+      .shipping {
+        float: right;
+        margin-top: 10px;
+      }
+      .product-description {
+        clear: both;
+      }
+      .third {
+        float: right;
+        width: 220px;
+        margin-top: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="product">
+      <h2 class="product-title">Converse Chuck Taylor All Star Low Top</h2>
+      <div class="first">
+        <img
+          src="./html-css-course-master/html-css-course-master/final/03-CSS-Fundamentals/img/post-img.jpg"
+          alt="Chuck Taylor All Star Shoe"
+          height="250"
+          width="250"
+        />
+      </div>
+      <div class="second">
+        <p class="price"><strong>$65.00</strong></p>
+        <p class="shipping">Free shipping</p>
+        <p class="sale">Sale</p>
+
+        <p class="product-description">
+          Ready to dress up or down, these classic canvas Chucks are an everyday
+          wardrobe staple.
+        </p>
+        <a href="https://converse.com" target="_blank" class="more-info"
+          >More information &rarr;</a
+        >
+
+        <div class="colors">
+          <div class="color"></div>
+          <div class="color color-blue"></div>
+          <div class="color color-red"></div>
+          <div class="color color-yellow"></div>
+          <div class="color color-green"></div>
+          <div class="color color-brown"></div>
+        </div>
+      </div>
+
+      <div class="third">
+        <h3 class="details-title">Product details</h3>
+        <ul class="details-list">
+          <li>Lightweight, durable canvas sneaker</li>
+          <li>Lightly padded footbed for added comfort</li>
+          <li>Iconic Chuck Taylor ankle patch.</li>
+        </ul>
+      </div>
+      <button class="add-cart">Add to cart</button>
+    </article>
+  </body>
+</html>

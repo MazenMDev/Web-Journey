@@ -1,0 +1,122 @@
+   :root {
+      --main-color: #087f5b;
+      --grey-color: #343a40;
+    }
+    /*
+      SPACING SYSTEM (px)
+      2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+
+      FONT SIZE SYSTEM (px)
+      10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+      */
+
+    /*
+      MAIN COLOR: #087f5b
+      GREY COLOR: #343a40
+      */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* ------------------------ */
+    /* GENERAL STYLES */
+    /* ------------------------ */
+    body {
+      font-family: "Inter", sans-serif;
+      color: #343a40;
+      line-height: 1;
+    }
+
+    .carousel {
+      width: 800px;
+      background-color: var(--main-color);
+      margin: 100px auto;
+      padding: 32px;
+      padding-left: 86px;
+      border-radius: 8px;
+
+      display: flex;
+      align-items: center;
+      gap: 86px;
+
+      position: relative;
+    }
+
+    .testimonial-text {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1.5;
+      margin-bottom: 32px;
+      color: #fff;
+    }
+    .testimonial-author {
+      font-size: 14px;
+      margin-bottom: 4px;
+      color: #fff;
+    }
+    .testimonial-job {
+      font-size: 12px;
+      color: #fff;
+    }
+
+    img {
+      height: 210px;
+      border-radius: 8px;
+      transform: scale(1.5);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Controls */
+    .btn {
+      background-color: #fff;
+      border: none;
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+      position: absolute;
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-icon {
+      height: 24px;
+      width: 24px;
+      stroke: var(--main-color);
+    }
+
+    .btn--left {
+      left: 0;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .btn--right {
+      right: 0;
+      top: 50%;
+      transform: translate(50%, -50%);
+    }
+
+    .dots {
+      display: flex;
+      gap: 12px;
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translate(-50%, 32px);
+    }
+    .dots > .fill {
+      background-color: var(--main-color);
+    }
+    .dot {
+      height: 12px;
+      width: 12px;
+      border-radius: 50%;
+      border: 2px solid var(--main-color);
+      background-color: #fff;
+      cursor: pointer;
+    }

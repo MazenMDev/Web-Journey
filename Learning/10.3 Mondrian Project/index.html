@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mondrian Project</title>
+  <style>
+    /* 
+    Write your CSS here 
+    Gap Colour: #000
+    White: #F0F1EC
+    Red: #E72F24
+    Black: #232629
+    Blue: #004592
+    Yellow: #F9D01E
+
+    For dimensions, see dimensions.png image.
+    HINT: Remember you can't change the properties of grid lines.
+    But grid lines are transparent!
+    */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
+    .contanier{
+      display: grid;
+      gap: 9px;
+      background-color: #000;
+      grid-template-columns: 320px 198px 153px 50px;
+      grid-template-rows: 414px 130px 155px 22px;
+    }
+
+    .Blue{
+      height: 130px;
+      width: 50px;
+      background-color: #004592;
+
+      grid-column-start: 4;
+      grid-row-start: 2;
+    }
+
+    .Yellow{
+      background-color:#F9D01E;
+      height: 20px;
+      width: 198px;
+
+      grid-column-start: 2;
+      grid-row-start: 4;
+    }
+
+    .Black{
+      background-color: #232629;
+      height: 20px;
+      width: 153px;
+
+      grid-column-start: 3;
+      grid-row-start: 4;
+    }
+
+    .Red{
+      height: 414px;
+      width: 320px;
+      background-color: #E72F24;
+
+      grid-column-start: 1;
+      grid-row-start: 1;
+    }
+
+    .White1{
+      height: 20px;
+      width: 320px;
+      background-color: #F0F1EC;
+
+      grid-column-start: 1;
+      grid-row-start: 4;
+    }
+
+      .White2{
+      height: 285px;
+      width: 320px;
+      background-color: #F0F1EC;
+
+      grid-column-start: 1;
+      grid-row-start: 2;
+    }
+
+    .White3{
+      background-color: #F0F1EC;
+
+      grid-column: span 3;
+    }
+    
+    .White4{
+      height: 175px;
+      width: 50px;
+      background-color: #F0F1EC;
+
+      grid-column-start: 4;
+      grid-row-start: 3;
+    }
+
+    .White5{
+      height: 285px;
+      width: 351px;
+      background-color: #F0F1EC;
+
+      grid-column-start: 2;
+      grid-row-start: 2;
+    }
+
+  </style>
+</head>
+
+<body>
+  <!-- Write your HTML here -->
+  <div class="contanier">
+    <div class="White1"></div>
+    <div class="White2"></div>
+    <div class="White3"></div>
+    <div class="White4"></div>
+    <div class="White5"></div>
+    <div class="White6"></div>
+    <div class="Red"></div>
+    <div class="Black"></div>
+    <div class="Yellow"></div>
+    <div class="Blue"></div>
+  </div>
+</body>
+
+</html>
