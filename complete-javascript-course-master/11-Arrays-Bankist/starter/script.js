@@ -74,3 +74,49 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+
+let arr = ['a', 'b', 'c', 'd', 'e'];
+
+// Slice method
+console.log(arr.slice(2)); // from 2 to the end
+console.log(arr.slice(2, 4)); // from 2 to < 4
+console.log(arr.slice(-2)); // take the last 2
+console.log(arr.slice(1, -2)); // from 1 to < last two
+console.log(arr.slice());
+console.log([...arr]); // shallow copy
+
+console.log('-----------');
+
+// Splice method (mutation)
+// console.log(arr.splice(2)); // extract from 2 to the end
+console.log(arr.splice(1, 2)); // from 2 and the number we want to delete
+console.log(arr); // the part from 2 to the end is missing cause of mutating
+
+// Reverse (mutation)
+let arr2 = ['j', 'i', 'h', 'g', 'f'];
+console.log(arr2.reverse());
+console.log(arr2); // mutated by reverse
+
+// Concat
+const letters = arr.concat(arr2); // mixing the first arr with the second arr2
+console.log(letters);
+console.log([...arr, ...arr2]); // working the same without mutating also
+
+// Join
+console.log(letters.join(' - '));
+
+const btn = document.getElementById('btn');
+let count = 0;
+let play = document.getElementById('btn');
+
+function render() {
+  btn.innerHTML = `Count: ${count}`;
+}
+
+btn.addEventListener('click', () => {
+  // Count from 1 to 10
+  if (count < 10) {
+    count += 1;
+    render();
+  }
+});
