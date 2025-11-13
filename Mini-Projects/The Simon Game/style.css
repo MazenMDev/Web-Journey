@@ -1,45 +1,315 @@
 * {
-  padding: 0;
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
-  background-color: #f1f3f5;
+  text-align: center;
+  background: linear-gradient(135deg, #0a1128 0%, #1a2b5f 50%, #0a1128 100%);
+  background-attachment: fixed;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: "Press Start 2P", cursive;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
-.buttons {
-  display: grid;
-  grid-template-columns: 200px 200px;
-  grid-template-rows: 200px 200px;
-  gap: 30px;
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background-image: radial-gradient(circle, white 1px, transparent 1px),
+    radial-gradient(circle, white 0.5px, transparent 0.5px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.8) 1.5px, transparent 1.5px);
+  background-size: 250px 250px, 150px 150px, 350px 350px;
+  background-position: 0 0, 40px 60px, 130px 270px;
+  animation: starMove 120s linear infinite;
+  opacity: 0.7;
+  z-index: 0;
+
+  will-change: transform;
+}
+
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background-image: radial-gradient(
+      circle,
+      rgba(173, 216, 230, 0.8) 0.5px,
+      transparent 0.5px
+    ),
+    radial-gradient(circle, rgba(135, 206, 250, 0.6) 1px, transparent 1px);
+  background-size: 200px 200px, 300px 300px;
+  background-position: 50px 50px, 180px 180px;
+  animation: starMove 180s linear infinite reverse;
+  opacity: 0.5;
+  z-index: 0;
+  will-change: transform;
+}
+
+@keyframes starMove {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-50%, -50%);
+  }
+}
+
+header {
+  z-index: 10;
+  padding: 20px;
+  padding-top: 40px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid rgba(254, 242, 191, 0.2);
+}
+
+#level-title {
+  font-size: 2rem;
+  margin: 20px 0;
+  color: #fef2bf;
+  text-shadow: 0 0 10px rgba(254, 242, 191, 0.5),
+    0 0 20px rgba(254, 242, 191, 0.3), 0 0 30px rgba(254, 242, 191, 0.2);
+  animation: pulse 5s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.scoreboard {
+  margin-top: 15px;
+  display: flex;
   justify-content: center;
-  align-content: center;
-  height: 80vh;
+  gap: 30px;
 }
 
-#btn {
-  height: 200px;
-  width: 200px;
-  border-radius: 20px;
-  border: 5px solid black;
+.score-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background: rgba(254, 242, 191, 0.1);
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 2px solid rgba(254, 242, 191, 0.3);
 }
 
-.green {
-  background-color: green;
+.score-item .label {
+  margin-top: 2px;
+  color: #fef2bf;
+  font-size: 0.8rem;
 }
+.score-item span:last-child {
+  color: #7dbaa6;
+  font-size: 1.2rem;
+}
+
+.game-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+.container {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn {
+  margin: 10px;
+  display: inline-block;
+  height: 220px;
+  width: 220px;
+  border: 8px solid rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+  transition: all 0.1s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.center-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 50%;
+  border: 5px solid rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8),
+    inset 0 5px 15px rgba(255, 255, 255, 0.1);
+  z-index: 100;
+}
+
+.logo {
+  color: #fef2bf;
+  font-size: 1.5rem;
+  text-shadow: 0 0 10px rgba(254, 242, 191, 0.8);
+  letter-spacing: 3px;
+}
+
+.game-over {
+  .game-area {
+    background: #d72020 !important;
+  }
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-10px);
+  }
+  75% {
+    transform: translateY(10px);
+  }
+}
+
 .red {
-  background-color: red;
+  background-color: #ff4757;
+  border-top-right-radius: 100%;
+}
+.green {
+  background-color: #2ed573;
+  border-top-left-radius: 100%;
 }
 .blue {
-  background-color: blue;
+  background-color: #1e90ff;
+  border-bottom-right-radius: 100%;
 }
 .yellow {
-  background: yellow;
+  background-color: #ffa502;
+  border-bottom-left-radius: 100%;
 }
 
-h1 {
-  justify-self: center;
-  font-size: 48px;
-  font-family: cursive;
+.pressed {
+  filter: brightness(1.5);
+  box-shadow: 0 0 20px white;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  z-index: 10;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-top: 2px solid rgba(254, 242, 191, 0.2);
+}
+
+footer p {
+  margin-top: 8px;
+  color: #fef2bf;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+@media (max-width: 578px) {
+  .container {
+    width: 350px;
+    height: 350px;
+  }
+
+  .btn {
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+  }
+
+  .center-circle {
+    width: 100px;
+    height: 100px;
+  }
+
+  .logo {
+    font-size: 1rem;
+  }
+
+  #level-title {
+    font-size: 1.2rem;
+  }
+
+  .scoreboard {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .score-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background: rgba(254, 242, 191, 0.1);
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 2px solid rgba(254, 242, 191, 0.3);
+  }
+
+  .score-item .label {
+    color: #fef2bf;
+    font-size: 0.6rem;
+  }
+  .score-item span:last-child {
+    color: #7dbaa6;
+    font-size: 0.8rem;
+  }
+
+  .row {
+    gap: 10px;
+  }
 }

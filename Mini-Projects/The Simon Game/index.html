@@ -1,22 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simon Game</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Press+Start+2P"
+      rel="stylesheet"
+    />
   </head>
+
   <body>
-    <div class="contanier">
-      <h1>Game Over, Press Any Key to Restart</h1>
-      <div class="buttons">
-        <div id="btn" class="green"></div>
-        <div id="btn" class="red"></div>
-        <div id="btn" class="yellow"></div>
-        <div id="btn" class="blue"></div>
+    <header>
+      <h1 id="level-title">Press A Key to Start</h1>
+      <div class="scoreboard">
+        <div class="score-item">
+          <span class="label">Max Score:</span>
+          <span id="max-score">0</span>
+        </div>
       </div>
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="index.js"></script>
+    </header>
+
+    <main class="game-area">
+      <div class="container">
+        <div class="row">
+          <div type="button" id="green" class="btn green"></div>
+          <div type="button" id="red" class="btn red"></div>
+        </div>
+
+        <div class="row">
+          <div type="button" id="yellow" class="btn yellow"></div>
+          <div type="button" id="blue" class="btn blue"></div>
+        </div>
+
+        <div class="center-circle">
+          <div class="logo">SIMON</div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <span>🎮</span>
+      <p>Made by Mazen Mahmoud</p>
+    </footer>
+
+    <script src="index.js" charset="utf-8"></script>
   </body>
 </html>
