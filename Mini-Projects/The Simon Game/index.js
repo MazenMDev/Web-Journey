@@ -2,10 +2,33 @@ const buttonColors = ["red", "green", "blue", "yellow"];
 
 let level = 0;
 let started = false;
-let maxScore = 0;
+
+
+let savedScore = localStorage.getItem("simonMaxScore"); 
+let maxScore = savedScore ? parseInt(savedScore) : 0; 
+
+let muted = false;
 
 let gamePattern = [];
 let clickPattern = [];
+
+// Display saved max score on page load
+document.getElementById("max-score").textContent = maxScore;
+
+// Sound toggle functionality
+const soundToggle = document.querySelector(".sound-toggle");
+const soundIcon = document.querySelector(".sound-icon");
+
+soundToggle.addEventListener("click", () => {
+  muted = !muted;
+  soundToggle.classList.toggle("muted");
+
+  if (muted) {
+    soundIcon.textContent = "🔇";
+  } else {
+    soundIcon.textContent = "🔊";
+  }
+});
 
 document.addEventListener("keypress", function () {
   if (!started) {
@@ -71,8 +94,10 @@ function nextSequence() {
 }
 
 function playSound(name) {
-  let audio = new Audio(`sounds/${name}.mp3`);
-  audio.play();
+  if (!muted) {
+    let audio = new Audio(`sounds/${name}.mp3`);
+    audio.play();
+  }
 }
 
 function animateButton(currentColor) {
@@ -84,7 +109,10 @@ function animateButton(currentColor) {
 }
 
 function startAgain() {
-  if (level > maxScore) maxScore = level;
+  if (level > maxScore) {
+    maxScore = level;
+    localStorage.setItem("simonMaxScore", maxScore);
+  }
   document.getElementById("max-score").textContent = maxScore;
   level = 0;
   gamePattern = [];

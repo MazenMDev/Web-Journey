@@ -81,6 +81,7 @@ header {
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
   border-bottom: 2px solid rgba(254, 242, 191, 0.2);
+  position: relative;
 }
 
 #level-title {
@@ -128,6 +129,78 @@ header {
 .score-item span:last-child {
   color: #7dbaa6;
   font-size: 1.2rem;
+}
+
+.sound-toggle {
+  user-select: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 20;
+  cursor: pointer;
+}
+
+.toggle-track {
+  width: 70px;
+  height: 35px;
+  background: linear-gradient(135deg, #4ecca3 0%, #2ed573 100%);
+  border-radius: 50px;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(46, 213, 115, 0.3),
+    inset 0 2px 8px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.toggle-track:hover {
+  box-shadow: 0 6px 20px rgba(46, 213, 115, 0.5),
+    inset 0 2px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 27px;
+  height: 27px;
+  background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+  border-radius: 50%;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.sound-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+/* Muted State */
+.sound-toggle.muted .toggle-track {
+  background: linear-gradient(135deg, #ff4757 0%, #d72020 100%);
+  box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3),
+    inset 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.sound-toggle.muted .toggle-track:hover {
+  box-shadow: 0 6px 20px rgba(255, 71, 87, 0.5),
+    inset 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.sound-toggle.muted .toggle-thumb {
+  transform: translateX(35px);
+}
+
+.mute p {
+  margin-top: 3px;
 }
 
 .game-area {
@@ -261,6 +334,10 @@ footer p {
   .container {
     width: 350px;
     height: 350px;
+  }
+
+  .sound-toggle {
+    scale: calc(0.8);
   }
 
   .btn {
