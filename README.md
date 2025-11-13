@@ -4,14 +4,25 @@ Here I collect projects, experiments, and mini-challenges as I build toward beco
 ---
 
 ## Current Goals
-- Master **JavaScript** and understand its core concepts deeply.  
-- Build **small projects** to apply what I learn and strengthen problem-solving.  
-- Improve **code practices**: clean, organized, and maintainable code.  
+
+- Master **JavaScript** and understand its core concepts deeply.
+- Build **small projects** to apply what I learn and strengthen problem-solving.
+- Improve **code practices**: clean, organized, and maintainable code.
 
 ---
 
 ## How to Use
-Clone this repository:
-```bash 
-git clone https://github.com/MazenMDev/Web-Journey.git
 
+Clone this repository:
+
+```bash
+git clone https://github.com/MazenMDev/Web-Journey.git
+```
+
+--
+
+## Mini Projects 🚀
+
+Check out the live preview of my mini projects:
+
+[Live Preview](https://MazenMDev.github.io/Web-Journey/Mini-Projects/index.html)
