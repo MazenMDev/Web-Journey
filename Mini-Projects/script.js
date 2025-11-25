@@ -35,6 +35,24 @@ function filterCards() {
     }
   });
 
+  // when there's a query, constrain visible results to a thinner layout
+  if (input.value.trim() !== "") {
+    projects.classList.add("search-active");
+  } else {
+    projects.classList.remove("search-active");
+  }
+
+  // Count visible cards and set a class when exactly one result exists.
+  const visibleCards = Array.from(cards).filter(
+    (c) => c.style.display !== "none"
+  );
+
+  if (visibleCards.length === 1 && input.value.trim() !== "") {
+    projects.classList.add("single-result");
+  } else {
+    projects.classList.remove("single-result");
+  }
+
   showMessage(!found);
 }
 
