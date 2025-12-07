@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Setup Builder Timer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Setup your builder timer</h2>
+      <form action="/set-timer" method="POST">
+        <div class="day">
+          <label for="days">Days:</label>
+          <input type="number" id="days" name="days" min="0" required />
+        </div>
+        <div class="hour">
+          <label for="hours">Hours:</label>
+          <input
+            type="number"
+            id="hours"
+            name="hours"
+            min="0"
+            max="23"
+            required
+          />
+        </div>
+        <div class="minute">
+          <label for="minutes">Minutes:</label>
+          <input
+            type="number"
+            id="minutes"
+            name="minutes"
+            min="0"
+            max="59"
+            required
+          />
+        </div>
+        <div class="task">
+          <label for="task">Task: </label>
+          <input type="text" id="task" name="task" required />
+        </div>
+        <button type="submit">Start Timer</button>
+      </form>
+      <img src="./img/builder.png" alt="Builder Image" />
+    </div>
+    <script src="./js/setup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,192 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Luckiest Guy", cursive;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to top left, #28b487, #7dd56f);
+
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  background: #fff;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  padding: 40px 50px;
+  border-radius: 20px;
+  text-align: center;
+  margin-top: 80px;
+  z-index: 10;
+  animation: slideIn 0.6s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(102, 126, 234, 0.1),
+    transparent
+  );
+  animation: rotate 6s linear infinite;
+  pointer-events: none;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  background: linear-gradient(to top left, #28b487, #7dd56f);
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1.3px;
+  font-weight: 400;
+  border-bottom: 2px solid #333;
+  word-spacing: 5px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  position: relative;
+  z-index: 1;
+}
+
+.day,
+.hour,
+.minute,
+.task {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+  animation: slideIn 0.5s ease forwards;
+  opacity: 0;
+}
+
+.day {
+  animation-delay: 0.1s;
+}
+
+.hour {
+  animation-delay: 0.2s;
+}
+
+.minute {
+  animation-delay: 0.3s;
+}
+
+.task {
+  animation-delay: 0.4s;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+label {
+  font-size: 20px;
+  color: #555;
+  letter-spacing: 1.2px;
+  width: 100px;
+  text-align: right;
+  font-weight: 400;
+}
+
+input {
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 2px solid #ddd;
+  font-size: 18px;
+  letter-spacing: 1.1px;
+  width: 180px;
+  transition: all 0.3s ease;
+  background: #f9f9f9;
+}
+
+input:focus {
+  outline: none;
+  border-color: #667eea;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  transform: scale(1.02);
+}
+
+input:hover {
+  border-color: #764ba2;
+}
+
+button {
+  padding: 14px 40px;
+  border: none;
+  border-radius: 12px;
+  letter-spacing: 1.5px;
+  word-spacing: 1.3px;
+  background: linear-gradient(to top left, #28b487, #7dd56f);
+
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  margin-top: 10px;
+  animation: slideIn 0.5s ease 0.4s forwards;
+  opacity: 0;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+img {
+  position: absolute;
+  top: 200px;
+  left: 300px;
+  width: 400px;
+}
