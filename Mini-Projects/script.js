@@ -3,6 +3,7 @@ const input = document.querySelector(".input");
 const search = document.querySelector(".search");
 const cards = document.querySelectorAll(".project-card");
 const projects = document.querySelector("main.projects");
+const spanNumber = document.querySelector("h2 span");
 
 // Toggle search bar
 btn.addEventListener("click", () => {
@@ -65,9 +66,6 @@ function showMessage(show) {
       msg = document.createElement("div");
       msg.id = "no-results-msg";
       msg.textContent = "No projects match your search.";
-      msg.style.textAlign = "center";
-      msg.style.padding = "2rem";
-      msg.style.color = "#777";
       projects.appendChild(msg);
     }
   } else {
@@ -76,3 +74,5 @@ function showMessage(show) {
 }
 
 input.addEventListener("input", filterCards);
+
+spanNumber.textContent = cards.length;

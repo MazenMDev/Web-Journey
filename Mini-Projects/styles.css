@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -16,7 +18,7 @@ body {
   background-attachment: fixed;
   min-height: 100vh; /* allow page to grow and scroll */
   width: 100%;
-  font-family: "Press Start 2P", cursive;
+  font-family: "Poppins", sans-serif;
   position: relative; /* keep pseudo-elements positioned relative to body */
   overflow: auto; /* enable scrolling to content below */
 }
@@ -92,6 +94,18 @@ h1 {
   letter-spacing: 2px;
 }
 
+h2 {
+  font-size: 1.5rem;
+  color: #eaeaea;
+  margin-top: 10px;
+  letter-spacing: 1.5px;
+}
+
+h2 span {
+  color: #39aad0;
+  font-weight: bold;
+}
+
 .search {
   margin-top: 30px;
   position: relative;
@@ -100,21 +114,26 @@ h1 {
 }
 
 .search .input {
-  background-color: #16476a;
+  background-color: rgba(0, 0, 0, 0.4);
   color: #eaeaea;
-  border: none;
+  border: 2px solid rgba(72, 198, 239, 0.25);
   font-size: 18px;
   font: inherit;
   padding: 15px;
   height: 50px;
   width: 50px;
   border-radius: 50px;
-  transition: width 0.4s ease;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: width 0.4s ease, border-color 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 154, 171, 0.2);
+}
+
+.search .input:focus {
+  border-color: rgba(72, 198, 239, 0.5);
+  box-shadow: 0 0 20px rgba(72, 198, 239, 0.3);
 }
 
 .btn {
-  background-color: #16476a;
+  background: linear-gradient(145deg, #004d57, #006b7a);
   color: #eaeaea;
   border: none;
   cursor: pointer;
@@ -235,8 +254,16 @@ a:hover {
   width: 100%;
 }
 
+#no-results-msg {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin: 0 auto;
+  color: #e74c3c;
+  font-size: 1.2rem;
+}
+
 /* RESPONSIVE */
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   .projects {
     grid-template-columns: repeat(3, 1fr);
   }
