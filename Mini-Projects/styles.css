@@ -102,7 +102,7 @@ h2 {
 }
 
 h2 span {
-  color: #39aad0;
+  color: rgb(7, 140, 184);
   font-weight: bold;
 }
 
@@ -153,11 +153,11 @@ h2 span {
 }
 
 .search.active .input {
-  width: 200px;
+  width: 250px;
 }
 
 .search.active .btn {
-  transform: translateX(150px);
+  transform: translateX(200px);
 }
 
 .projects {
@@ -227,16 +227,40 @@ a:hover {
   text-decoration: underline;
 }
 
-/* When search active: show matching cards in a narrow centered column (max-width 400px) */
-.projects.search-active {
-  gap: 18px;
-  padding-left: 20px;
-  padding-right: 20px;
+.hidden {
+  display: none !important;
 }
-.projects.search-active .project-card {
-  margin: 0 auto;
-  max-width: 400px;
-  width: 100%;
+
+.autocomplete-container.active {
+  position: absolute;
+  background: linear-gradient(145deg, #1a1a1a, #242424);
+  border: 2px solid rgba(72, 198, 239, 0.3);
+  border-radius: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  width: 200px;
+  margin-top: 5px;
+  left: 10px;
+  z-index: 1000;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.suggestion {
+  padding: 10px 15px;
+  color: #eaeaea;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(72, 198, 239, 0.1);
+}
+
+.suggestion:last-child {
+  border-bottom: none;
+}
+
+.suggestion:hover {
+  background: linear-gradient(145deg, #004d57, #006b7a);
+  padding-left: 20px;
+  border-left: 3px solid #48c6ef;
 }
 
 .projects.single-result {

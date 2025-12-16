@@ -1,78 +1,105 @@
-const btn = document.querySelector(".btn");
 const input = document.querySelector(".input");
+const btn = document.querySelector(".btn");
 const search = document.querySelector(".search");
-const cards = document.querySelectorAll(".project-card");
-const projects = document.querySelector("main.projects");
 const spanNumber = document.querySelector("h2 span");
+const projects = document.querySelector(".projects");
+const cards = document.querySelectorAll(".project-card");
+const suggest = document.querySelector(".autocomplete-container");
 
-// Toggle search bar
-btn.addEventListener("click", () => {
+spanNumber.textContent = cards.length;
+
+btn.addEventListener("click", toggleSearch);
+input.addEventListener(
+  "input",
+  debounce(() => {
+    handleSearch();
+    showSuggestions(input.value.toLowerCase().trim());
+  }, 300)
+);
+
+function toggleSearch() {
   search.classList.toggle("active");
+  suggest.classList.toggle("active");
   input.focus();
-});
+}
 
-// Filter cards
-function filterCards() {
-  const text = input.value.toLowerCase().trim();
+function handleSearch() {
+  const searchText = input.value.toLowerCase().trim();
   let found = false;
 
   cards.forEach((card) => {
-    const title =
-      card.querySelector(".card-body h3")?.textContent.toLowerCase() || "";
-    const desc =
-      card.querySelector(".card-body p")?.textContent.toLowerCase() || "";
-    const attr = card.getAttribute("data-title")?.toLowerCase() || "";
+    const title = getText(card, "h3");
+    const description = getText(card, "p");
 
-    if (
-      text === "" ||
-      title.includes(text) ||
-      desc.includes(text) ||
-      attr.includes(text)
-    ) {
-      card.style.display = "";
-      found = true;
-    } else {
-      card.style.display = "none";
-    }
+    const matches =
+      searchText === "" ||
+      title.includes(searchText) ||
+      description.includes(searchText);
+
+    card.classList.toggle("hidden", !matches);
+    if (matches) found = true;
   });
 
-  // when there's a query, constrain visible results to a thinner layout
-  if (input.value.trim() !== "") {
-    projects.classList.add("search-active");
-  } else {
-    projects.classList.remove("search-active");
-  }
-
-  // Count visible cards and set a class when exactly one result exists.
   const visibleCards = Array.from(cards).filter(
-    (c) => c.style.display !== "none"
+    (card) => !card.classList.contains("hidden")
   );
+  spanNumber.textContent = `Showing ${visibleCards.length} from ${cards.length}`;
 
-  if (visibleCards.length === 1 && input.value.trim() !== "") {
-    projects.classList.add("single-result");
-  } else {
-    projects.classList.remove("single-result");
-  }
+  if (visibleCards.length == 1) projects.classList.add("single-result");
+  else projects.classList.remove("single-result");
 
-  showMessage(!found);
+  toggleNoResultsMessage(found, searchText);
 }
 
-// Show no-results message
-function showMessage(show) {
-  let msg = document.getElementById("no-results-msg");
-
-  if (show) {
-    if (!msg) {
-      msg = document.createElement("div");
-      msg.id = "no-results-msg";
-      msg.textContent = "No projects match your search.";
-      projects.appendChild(msg);
+function toggleNoResultsMessage(found, searchText) {
+  let mes = document.getElementById("no-results-msg");
+  if (!found && searchText !== "") {
+    if (!mes) {
+      mes = document.createElement("div");
+      mes.id = "no-results-msg";
+      mes.textContent = "No Results Found";
+      projects.appendChild(mes);
     }
   } else {
-    if (msg) msg.remove();
+    if (mes) mes.remove();
   }
 }
 
-input.addEventListener("input", filterCards);
+function getText(card, selector) {
+  return card.querySelector(`${selector}`).textContent.toLowerCase();
+}
 
-spanNumber.textContent = cards.length;
+function debounce(func, delay) {
+  let timeOut;
+  return function (...args) {
+    clearTimeout(timeOut);
+    timeOut = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}
+
+function showSuggestions(searchText) {
+  suggest.innerHTML = "";
+
+  if (searchText === "") return;
+
+  cards.forEach((card) => {
+    const title = getText(card, "h3");
+    const description = getText(card, "p");
+
+    if (title.includes(searchText) || description.includes(searchText)) {
+      const suggestion = document.createElement("div");
+      suggestion.className = "suggestion";
+      suggestion.textContent = card.querySelector("h3").textContent;
+
+      suggestion.addEventListener("click", () => {
+        input.value = suggestion.textContent;
+        handleSearch();
+        suggest.innerHTML = "";
+      });
+
+      suggest.appendChild(suggestion);
+    }
+  });
+}
