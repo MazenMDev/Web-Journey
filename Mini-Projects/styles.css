@@ -245,6 +245,24 @@ a:hover {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 }
 
+.autocomplete-container.active::-webkit-scrollbar {
+  width: 14px;
+}
+
+.autocomplete-container.active::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.autocomplete-container.active::-webkit-scrollbar-thumb {
+  background: linear-gradient(145deg, #004d57, #006b7a);
+  border-radius: 4px;
+}
+
+.autocomplete-container.active::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(145deg, #006b7a, #48c6ef);
+}
+
 .suggestion {
   padding: 10px 15px;
   color: #eaeaea;
