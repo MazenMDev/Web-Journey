@@ -174,7 +174,6 @@ h2 span {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   overflow: hidden;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  text-decoration: none;
   color: inherit;
 }
 
@@ -182,6 +181,7 @@ h2 span {
   transform: translateY(-8px);
   box-shadow: 0 8px 30px rgba(0, 154, 171, 0.5);
   border-color: rgba(72, 198, 239, 0.4);
+  text-decoration: none;
 }
 
 .project-card img {
