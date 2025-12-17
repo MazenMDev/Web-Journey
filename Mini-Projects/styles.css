@@ -23,6 +23,24 @@ body {
   overflow: auto; /* enable scrolling to content below */
 }
 
+body::-webkit-scrollbar {
+  width: 14px;
+}
+
+body::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: linear-gradient(145deg, #004d57, #006b7a);
+  border-radius: 4px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(145deg, #006b7a, #48c6ef);
+}
+
 body::before {
   /* decorative starfield: fixed so it doesn't expand page size */
   z-index: -1;
