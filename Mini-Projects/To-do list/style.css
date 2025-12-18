@@ -103,11 +103,11 @@ input[type="checkbox"] {
   transition: all 0.3s ease;
 }
 
-input[type="checkbox"]:checked {
+li.completed input[type="checkbox"] {
   background-color: var(--primary-green);
 }
 
-input[type="checkbox"]:checked::after {
+li.completed input[type="checkbox"]::after {
   content: "✓";
   position: absolute;
   top: 50%;
@@ -136,10 +136,10 @@ input[type="checkbox"] + label::before {
   transition: width 0.3s ease;
 }
 
-input[type="checkbox"]:checked + label::before {
+li.completed input[type="checkbox"] + label::before {
   width: 100%;
 }
 
-input[type="checkbox"]:checked + label {
+li.completed input[type="checkbox"] + label {
   color: var(--gray-muted);
 }
