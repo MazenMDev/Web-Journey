@@ -20,7 +20,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
@@ -46,7 +46,6 @@ input[type="text"] {
   padding: 10px 7px;
   border: 2px solid var(--gray-medium);
   border-radius: 5px;
-  width: 250px;
   font-size: 16px;
 
   transition: all 0.3s ease;
@@ -58,7 +57,7 @@ input[type="text"]:focus {
 }
 
 #add-task-button {
-  paddin: 10px 15px;
+  padding: 6px 12px;
   background-color: var(--primary-green);
   border: none;
   border-radius: 5px;
@@ -70,6 +69,93 @@ input[type="text"]:focus {
 
 #add-task-button:hover {
   background-color: #76d66f;
+}
+
+.my-tasks {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.my-tasks--header {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--text-dark);
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
+#clear-tasks-button {
+  padding: 7px 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff3333;
+  color: var(--bg-white);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#clear-tasks-button:hover {
+  background-color: #e62e2e;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s ease;
+}
+
+.modal-content {
+  background-color: var(--bg-white);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.modal-content p {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: var(--text-dark);
+}
+
+.modal-content button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  color: var(--text-dark);
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#confirm-clear-button {
+  background-color: #ff3333;
+  color: var(--bg-white);
+  margin-right: 10px;
+}
+#confirm-clear-button:hover {
+  background-color: #e62e2e;
+}
+#cancel-clear-button {
+  background-color: var(--gray-medium);
+  color: var(--bg-white);
+}
+#cancel-clear-button:hover {
+  background-color: #9e9e9e;
 }
 
 .todo-list {
@@ -142,4 +228,29 @@ li.completed input[type="checkbox"] + label::before {
 
 li.completed input[type="checkbox"] + label {
   color: var(--gray-muted);
+}
+
+.delete-task {
+  margin-left: auto;
+  background-color: transparent;
+  border: 1px solid var(--primary-green);
+  border-radius: 5px;
+  padding: 10px 10px;
+  color: var(--gray-muted);
+  font-size: 18px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.delete-task:hover {
+  color: var(--text-dark);
+}
+
+.delete-task span {
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

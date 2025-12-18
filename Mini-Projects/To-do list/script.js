@@ -1,8 +1,29 @@
 const toDoList = document.querySelector(".todo-list");
 const btn = document.getElementById("add-task-button");
 const text = document.getElementById("new-task-input");
-
+const clearBtn = document.getElementById("clear-tasks-button");
+const modal = document.getElementById("clear-modal");
+const confirmBtn = document.getElementById("confirm-clear-button");
+const cancelBtn = document.getElementById("cancel-clear-button");
 let tasks = [];
+
+clearBtn.addEventListener("click", () => {
+  modal.style.opacity = "1";
+  modal.style.visibility = "visible";
+});
+
+confirmBtn.addEventListener("click", () => {
+  tasks = [];
+  saveTasks();
+  renderTasks();
+  modal.style.opacity = "0";
+  modal.style.visibility = "hidden";
+});
+
+cancelBtn.addEventListener("click", () => {
+  modal.style.opacity = "0";
+  modal.style.visibility = "hidden";
+});
 
 text.addEventListener("keypress", (e) => {
   if (e.key === "Enter") btn.click();
@@ -29,6 +50,15 @@ toDoList.addEventListener("click", (e) => {
   e.target.closest("li").classList.toggle("completed", task.completed);
 });
 
+toDoList.addEventListener("click", (e) => {
+  const deleteBtn = e.target.closest(".delete-task");
+  if (!deleteBtn) return;
+
+  const id = Number(deleteBtn.dataset.id);
+  tasks = tasks.filter((task) => task.id !== id);
+  renderTasks();
+});
+
 function addTaskToList(task) {
   tasks.push({
     id: Date.now(),
@@ -50,6 +80,7 @@ function renderTasks() {
       task.completed ? "checked" : ""
     } />
     <label for="${task.id}">${task.title}</label>
+    <button class="delete-task" data-id="${task.id}"><span>x</span></button>
     `;
     toDoList.appendChild(li);
   });
