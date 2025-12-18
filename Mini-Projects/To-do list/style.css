@@ -1,0 +1,145 @@
+:root {
+  --primary-green: #8beb85;
+  --text-dark: #0c120b;
+  --bg-white: #ffffff;
+  --bg-light: #f2f2f2;
+  --gray-medium: #acacac;
+  --gray-muted: #6c6f6c;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--bg-white);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+h1 {
+  margin-bottom: 50px;
+  font-size: 48px;
+  font-weight: bold;
+  color: var(--primary-green);
+  border-bottom: 1px solid var(--gray-muted);
+  padding-bottom: 10px;
+}
+
+.new-task--container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  padding: 10px 7px;
+  border: 2px solid var(--gray-medium);
+  border-radius: 5px;
+  width: 250px;
+  font-size: 16px;
+
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: var(--primary-green);
+  outline: none;
+}
+
+#add-task-button {
+  paddin: 10px 15px;
+  background-color: var(--primary-green);
+  border: none;
+  border-radius: 5px;
+  color: var(--text-dark);
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#add-task-button:hover {
+  background-color: #76d66f;
+}
+
+.todo-list {
+  list-style-type: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+.todo-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--bg-light);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.todo-list li:last-child {
+  border-bottom: none;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  border: 2px solid #84fb7c;
+  border-radius: 3px;
+  background-color: transparent;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--primary-green);
+}
+
+input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: var(--text-dark);
+  font-size: 14px;
+  transform: translate(-50%, -50%);
+}
+
+input[type="checkbox"] + label {
+  position: relative;
+  cursor: pointer;
+  color: var(--text-dark);
+  user-select: none;
+}
+
+input[type="checkbox"] + label::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--text-dark);
+  transform: translateY(-50%);
+  transition: width 0.3s ease;
+}
+
+input[type="checkbox"]:checked + label::before {
+  width: 100%;
+}
+
+input[type="checkbox"]:checked + label {
+  color: var(--gray-muted);
+}
