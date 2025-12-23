@@ -18,8 +18,8 @@ body {
 .bg {
   position: absolute;
   inset: 0;
-  background: url("/complete-javascript-course-master/16-Asynchronous/final/img/img-1.jpg")
-    no-repeat center center/cover;
+  background: url("./img/grass.png");
+  background-size: cover;
   z-index: -1;
   filter: blur(0px);
 }
