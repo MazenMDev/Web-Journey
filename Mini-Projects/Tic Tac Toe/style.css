@@ -1,5 +1,7 @@
 :root {
   --primary-color: #068da9;
+  --darker-primary: #046376;
+  --win-color: #737373ff;
   --secondry-color: #3e3939;
   --darkder-second: #2c2727;
   --light-color: #f6f4f4;
@@ -18,10 +20,22 @@ body {
   min-height: 100vh;
 }
 
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 h1 {
   font-size: 48px;
   color: var(--light-color);
   text-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+  font-size: 32px;
+  color: var(--darker-primary);
+  text-shadow: 0 10px 15px rgb(0, 0, 0, 0.2);
 }
 
 main {

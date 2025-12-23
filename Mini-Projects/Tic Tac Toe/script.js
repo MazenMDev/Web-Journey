@@ -2,32 +2,14 @@ const container = document.querySelector(".container");
 const boxes = document.querySelectorAll(".box");
 const spans = document.querySelectorAll(".box span");
 const btn = document.querySelector(".btn");
-const header = document.querySelector("h1");
+const headerOne = document.querySelector("h1");
+const headerTwo = document.querySelector("h2");
 
 let board = Array(9).fill("");
 let currentPlayer = "X";
 let gameOver = false;
-
-
-function renderMove(index, player) {
-  const span = boxes[index].querySelector("span");
-  span.innerHTML = player;
-}
-
-function renderResult(result) {
-  if (result === "X" || result === "O") {
-    header.innerHTML = `${result} is the winner`;
-    gameOver = true;
-  } else if (result === "draw") {
-    header.innerHTML = "Draw";
-    gameOver = true;
-  }
-}
-
-function resetUI() {
-  spans.forEach((span) => (span.innerHTML = ""));
-  header.innerHTML = "Tic Tac Toe Game";
-}
+let saveCon = null;
+let lastLoser = null;
 
 boxes.forEach((box, index) => {
   box.addEventListener("click", () => {
@@ -44,6 +26,39 @@ boxes.forEach((box, index) => {
   });
 });
 
+function renderMove(index, player) {
+  const span = boxes[index].querySelector("span");
+  span.innerHTML = player;
+}
+
+function renderResult(result) {
+  if (result === "X" || result === "O") {
+    renderWinner(result);
+    lastLoser = result === "X" ? "O" : "X";
+    gameOver = true;
+  } else if (result === "draw") {
+    headerOne.innerHTML = "Draw";
+    gameOver = true;
+  }
+}
+
+function renderWinner(winner) {
+  headerOne.innerHTML = `${winner} is the winner`;
+  const [a, b, c] = saveCon;
+  boxes[a].style.backgroundColor = "var(--win-color)";
+  boxes[b].style.backgroundColor = "var(--win-color)";
+  boxes[c].style.backgroundColor = "var(--win-color)";
+}
+
+function resetUI() {
+  spans.forEach((span) => (span.innerHTML = ""));
+  boxes.forEach((box) => {
+    box.style.backgroundColor = "var(--primary-color)";
+  });
+  headerOne.innerHTML = "Tic Tac Toe Game";
+  headerTwo.innerHTML = `${lastLoser} Turn`;
+}
+
 function getGameResult() {
   const wins = [
     [0, 1, 2],
@@ -59,7 +74,8 @@ function getGameResult() {
   for (let win of wins) {
     const [a, b, c] = win;
     if (board[a] !== "" && board[a] === board[b] && board[a] === board[c]) {
-      return board[a]; 
+      saveCon = win;
+      return board[a];
     }
   }
 
@@ -70,7 +86,8 @@ function getGameResult() {
 
 btn.addEventListener("click", () => {
   board = Array(9).fill("");
-  currentPlayer = "X";
+  currentPlayer = lastLoser;
   gameOver = false;
+  saveCon = null;
   resetUI();
 });
