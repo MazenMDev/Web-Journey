@@ -1,0 +1,78 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  background-image: url("./img/newyear.jpg");
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(2px);
+}
+
+.countdown-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background: rgba(30, 30, 60, 0.35);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  border-radius: 24px;
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  padding: 40px 60px 32px 60px;
+  gap: 50px;
+  backdrop-filter: blur(8px);
+  margin-top: 0;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.timer {
+  display: flex;
+  gap: 50px;
+  font-weight: bold;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.timer-el {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 18px 24px 12px 24px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  min-width: 90px;
+  user-select: none;
+  transition: transform 0.2s;
+}
+
+.big-text {
+  font-size: 62px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+  margin-bottom: 6px;
+}
+
+.timer-el span {
+  font-size: 18px;
+  color: #e0e0e0;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
