@@ -12,7 +12,11 @@ convertBtn.addEventListener("click", () => {
 
 function convertToD() {
   const input = binaryInput.value.trim();
-  console.log(input);
+  if (!/^[01]+$/.test(input)) {
+    updateValue("Invalid binary number");
+    return;
+  }
+
   let mult = input.length - 1;
   let sum = 0;
   for (let i of input) {
