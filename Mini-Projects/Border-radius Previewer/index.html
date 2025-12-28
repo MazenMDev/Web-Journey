@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Border-radius Previewer</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Border-radius Generator</h1>
+      </header>
+      <div class="generator">
+        <div class="generator-shape" id="shape"></div>
+        <span class="generator-handle" id="top-left"> </span>
+        <span class="generator-handle" id="top-right"> </span>
+        <span class="generator-handle" id="bottom-right"> </span>
+        <span class="generator-handle" id="bottom-left"> </span>
+      </div>
+      <div class="Border-radius-output">
+        <h2>Border-radius:</h2>
+        <div class="output-code-container">
+          <span class="output-code" id="code">
+            0% 100% 0% 100% / 100% 0% 100% 0%
+          </span>
+          <button class="copy-btn">Copy</button>
+        </div>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
