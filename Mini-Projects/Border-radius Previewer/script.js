@@ -14,7 +14,7 @@ let draggingHandleIndex = null;
 // function to update border-radius
 function updateBorderRadius() {
   shape.style.borderRadius = `${borderRadius[0]}% ${borderRadius[1]}% ${borderRadius[2]}% ${borderRadius[3]}%`;
-  code.textContent = `border-radius: ${borderRadius[0]}% ${borderRadius[1]}% ${borderRadius[2]}% ${borderRadius[3]}%;`;
+  code.textContent = `${borderRadius[0]}% ${borderRadius[1]}% ${borderRadius[2]}% ${borderRadius[3]}%;`;
 }
 
 function handleMouse(index) {
@@ -36,6 +36,9 @@ document.addEventListener("mousemove", (e) => {
   let y = e.clientY - parentRect.top;
   x = Math.max(0, Math.min(x, parentRect.width));
   y = Math.max(0, Math.min(y, parentRect.height));
+  console.log("Mouse Move:");
+  console.log(x, y);
+  console.log(parentRect.top, parentRect.left);
   let percent = 0;
   let handle;
 
