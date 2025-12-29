@@ -4,12 +4,31 @@ const topRight = document.getElementById("top-right");
 const bottomRight = document.getElementById("bottom-right");
 const bottomLeft = document.getElementById("bottom-left");
 const code = document.getElementById("code");
+const copyBtn = document.querySelector(".copy-btn");
 const shape = document.getElementById("shape");
 const parent = shape.parentElement;
 
 let borderRadius = [0, 0, 0, 0];
 let isDragging = false;
 let draggingHandleIndex = null;
+
+copyBtn.addEventListener("click", copyCode);
+
+function copyCode() {
+  const textarea = document.createElement("textarea");
+  textarea.value = code.textContent;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  document.body.removeChild(textarea);
+  copyBtn.textContent = "Copied!";
+}
+
+copyBtn.addEventListener("mouseleave", () => {
+  setTimeout(() => {
+    copyBtn.textContent = "Copy";
+  }, 1000);
+});
 
 // function to update border-radius
 function updateBorderRadius() {
