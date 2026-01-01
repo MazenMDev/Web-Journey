@@ -94,7 +94,7 @@ function startTimer() {
     timeLeft = Work_Time;
   }
 
-  countDown = setInterval(updateTimer, 0.1);
+  countDown = setInterval(updateTimer, 1000);
   updateUI();
 }
 

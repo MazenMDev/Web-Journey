@@ -82,6 +82,9 @@ h1 {
 }
 
 #switch-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: var(--white);
   color: var(--primary);
   box-shadow: 0 5px 5px var(--secondry);
