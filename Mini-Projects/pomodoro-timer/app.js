@@ -10,7 +10,9 @@ const overlay = document.getElementById("overlay");
 const containerCustomize = document.querySelector(".customization-container");
 const saveBtn = document.getElementById("save-customization");
 const closeBtn = document.getElementById("close-customization");
-let clickSound = new Audio("./sounds/click.wav");
+const clickSound = new Audio("./sounds/click.wav");
+const endWorkSound = new Audio("./sounds/end_work.wav");
+const endSessionSound = new Audio("./sounds/end_session.mp3");
 
 let timeLeft = 1500;
 let state = "idle"; // idle, work, paused
@@ -92,7 +94,7 @@ function startTimer() {
     timeLeft = Work_Time;
   }
 
-  countDown = setInterval(updateTimer, 1);
+  countDown = setInterval(updateTimer, 0.1);
   updateUI();
 }
 
@@ -149,10 +151,12 @@ function handleEndSession() {
     onBreak = false;
     state = "idle";
     timeLeft = Work_Time;
+    endSessionSound.play();
   } else {
     onBreak = true;
     state = "paused";
     timeLeft = Break_Time;
+    endWorkSound.play();
   }
 
   updateUI();
