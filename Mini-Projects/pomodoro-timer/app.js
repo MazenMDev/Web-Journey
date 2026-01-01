@@ -1,14 +1,3 @@
-// what we need is
-/*  
-  work state -> ends -> break state -> ends -> work .... -> END of the session.
-  timeline for 25min work and 5min break.
-  count during one day how many end sessions -> save in array show best day in this week.
-  how many hours spend per day and per week.
-  sounds -> (for click, notification when finish work or break, for end of the session).
-  User customization for timer, sessions.
-
-  expand later
-*/
 const timer = document.getElementById("timer");
 const switchBtn = document.getElementById("switch-btn");
 const reset = document.getElementById("reset");
@@ -16,15 +5,19 @@ const sessionsNumber = document.querySelector(".number-sessions span");
 const progressBar = document.getElementById("progress-bar");
 const lastWeekBtn = document.getElementById("last-week-stats");
 const containerLastWeek = document.querySelector(".container-lastWeek");
+const editBtn = document.getElementById("customize-btn");
 const overlay = document.getElementById("overlay");
+const containerCustomize = document.querySelector(".customization-container");
+const saveBtn = document.getElementById("save-customization");
+const closeBtn = document.getElementById("close-customization");
 let clickSound = new Audio("./sounds/click.wav");
 
 let timeLeft = 1500;
 let state = "idle"; // idle, work, paused
 let onBreak = false;
 
-const Work_Time = 25 * 60;
-const Break_Time = 5 * 60;
+let Work_Time = 25 * 60;
+let Break_Time = 5 * 60;
 
 let countDown = null;
 
@@ -48,6 +41,37 @@ switchBtn.addEventListener("click", () => {
 
 reset.addEventListener("click", resetTimer);
 lastWeekBtn.addEventListener("click", getLastWeekStats);
+editBtn.addEventListener("click", customizeSession);
+
+function customizeSession() {
+  containerCustomize.classList.add("show");
+  overlay.style.display = "block";
+
+  saveBtn.addEventListener("click", () => {
+    const workInput = document.getElementById("work-duration").value;
+    const breakInput = document.getElementById("break-duration").value;
+    if (workInput > 0) {
+      Work_Time = workInput * 60;
+    }
+    if (breakInput > 0) {
+      Break_Time = breakInput * 60;
+    }
+    resetTimer();
+    containerCustomize.classList.remove("show");
+    overlay.style.display = "none";
+    alert("Customization Saved!");
+  });
+
+  closeBtn.addEventListener("click", () => {
+    containerCustomize.classList.remove("show");
+    overlay.style.display = "none";
+  });
+
+  overlay.addEventListener("click", () => {
+    containerCustomize.classList.remove("show");
+    overlay.style.display = "none";
+  });
+}
 
 function setSwitchBtnUI(text) {
   switchBtn.innerHTML = text;
