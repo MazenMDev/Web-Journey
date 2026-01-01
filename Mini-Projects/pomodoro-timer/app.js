@@ -58,7 +58,7 @@ function startTimer() {
     timeLeft = onBreak ? Break_Time : Work_Time;
   }
 
-  countDown = setInterval(updateTimer, 1);
+  countDown = setInterval(updateTimer, 1000);
   updateUI();
 }
 
@@ -101,6 +101,10 @@ function updateUI() {
   timer.textContent = `${String(minutes).padStart(2, "0")}:${String(
     seconds
   ).padStart(2, "0")}`;
+
+  let totalTime = onBreak ? Break_Time : Work_Time;
+  let progressPercent = ((totalTime - timeLeft) / totalTime) * 100;
+  document.getElementById("progress-bar").style.width = progressPercent + "%";
 }
 
 function handleEndSession() {
@@ -110,7 +114,7 @@ function handleEndSession() {
     timeLeft = Work_Time;
   } else {
     onBreak = true;
-    state = "paused"; 
+    state = "paused";
     timeLeft = Break_Time;
   }
 

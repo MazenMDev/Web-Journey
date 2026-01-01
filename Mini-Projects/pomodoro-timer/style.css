@@ -26,6 +26,7 @@ body {
 }
 
 .container-timer {
+  position: relative;
   background-color: var(--primary);
   margin-top: 150px;
   display: flex;
@@ -82,4 +83,14 @@ body {
 
 #reset svg {
   width: 24px;
+}
+
+#progress-bar {
+  position: absolute;
+  top : 0;
+  height: 8px;
+  width: 0%;
+  background-color: var(--secondry);
+  border-radius: 8px 8px 0 0; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
