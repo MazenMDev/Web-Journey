@@ -2,6 +2,13 @@
   Start Simple Pomodoro Timer Styles then expand later
 */
 
+:root {
+  --bg-color: #061e29;
+  --primary: #1d546d;
+  --secondry: #5f9598;
+  --white: #f3f4f4;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -14,9 +21,12 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--white);
 }
 
 .container-timer {
+  background-color: var(--primary);
   margin-top: 150px;
   display: flex;
   flex-direction: column;
@@ -35,22 +45,41 @@ body {
 .buttons {
   display: flex;
   gap: 20px;
+  align-items: center;
   margin-top: 30px;
   padding: 10px 20px;
   border-radius: 10px;
+  margin-right: -60px;
 }
 
 .btn {
-  font-size: 1.5rem;
+  font-size: 2rem;
+  font-weight: bold;
   border: none;
   border-radius: 6px;
   padding: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-
+  display: flex;
   transition: 0.3s ease;
 }
 
 .btn:active {
   box-shadow: none;
+}
+
+#switch-btn {
+  background-color: var(--white);
+  color: var(--primary);
+  box-shadow: 0 5px 5px var(--secondry);
+  width: 200px;
+  padding: 20px 60px;
+}
+
+#reset {
+  height: fit-content;
+}
+
+#reset svg {
+  width: 24px;
 }

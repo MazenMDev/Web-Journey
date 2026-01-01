@@ -9,35 +9,57 @@
 
   expand later
 */
-
 const timer = document.getElementById("timer");
-const start = document.getElementById("start");
-const pause = document.getElementById("pause");
+const switchBtn = document.getElementById("switch-btn");
 const reset = document.getElementById("reset");
+let clickSound = new Audio("./sounds/click.wav");
 
 let timeLeft = 1500;
-let state = "idle";
+let state = "idle"; // idle, work, paused
+let onBreak = false;
 
 const Work_Time = 25 * 60;
 const Break_Time = 5 * 60;
 
 let countDown = null;
 
-start.addEventListener("click", startTimer);
-pause.addEventListener("click", pauseTimer);
+switchBtn.addEventListener("click", () => {
+  clickSound.play();
+
+  if (state === "idle" || state === "paused") {
+    startTimer();
+    state = "work";
+    setSwitchBtnUI("Pause");
+  } else if (state === "work") {
+    pauseTimer();
+    state = "paused";
+    setSwitchBtnUI("Start");
+  }
+});
+
 reset.addEventListener("click", resetTimer);
+
+function setSwitchBtnUI(text) {
+  switchBtn.innerHTML = text;
+  if (text === "Pause") {
+    switchBtn.style.boxShadow = "none";
+    switchBtn.style.transform = "translateY(0)";
+  } else {
+    switchBtn.style.boxShadow = "0 5px 5px var(--secondry)";
+    switchBtn.style.transform = "translateY(-2px)";
+  }
+}
 
 function startTimer() {
   if (countDown) return;
 
-  if (state === "idle") {
+  if (state === "idle" || (state === "paused" && onBreak)) {
     state = "work";
-    timeLeft = Work_Time;
+    timeLeft = onBreak ? Break_Time : Work_Time;
   }
 
-  countDown = setInterval(updateTimer, 1000);
+  countDown = setInterval(updateTimer, 1);
   updateUI();
-  updateButtons();
 }
 
 function updateTimer() {
@@ -46,7 +68,7 @@ function updateTimer() {
   if (timeLeft <= 0) {
     clearInterval(countDown);
     countDown = null;
-    changeState();
+    handleEndSession();
     return;
   }
 
@@ -55,12 +77,9 @@ function updateTimer() {
 
 function pauseTimer() {
   if (!countDown) return;
-
   clearInterval(countDown);
   countDown = null;
   state = "paused";
-
-  updateButtons();
 }
 
 function resetTimer() {
@@ -68,29 +87,11 @@ function resetTimer() {
   countDown = null;
 
   state = "idle";
+  onBreak = false;
   timeLeft = Work_Time;
 
   updateUI();
-  updateButtons();
-}
-
-function updateButtons() {
-  if (state === "idle") {
-    start.disabled = false;
-    pause.disabled = true;
-  } else if (state === "work" || state === "break") {
-    start.disabled = true;
-    pause.disabled = false;
-  } else if (state === "paused") {
-    start.disabled = false;
-    pause.disabled = true;
-  }
-
-  start.style.cursor = start.disabled ? "not-allowed" : "pointer";
-  pause.style.cursor = pause.disabled ? "not-allowed" : "pointer";
-
-  start.style.boxShadow = start.disabled ? "none" : "0 2px 5px rgba(0,0,0,0.3)";
-  pause.style.boxShadow = pause.disabled ? "none" : "0 2px 5px rgba(0,0,0,0.3)";
+  setSwitchBtnUI("Start");
 }
 
 function updateUI() {
@@ -102,15 +103,17 @@ function updateUI() {
   ).padStart(2, "0")}`;
 }
 
-function changeState() {
-  if (state === "work") {
-    state = "break";
-    timeLeft = Break_Time;
-  } else if (state === "break") {
-    state = "work";
+function handleEndSession() {
+  if (onBreak) {
+    onBreak = false;
+    state = "idle";
     timeLeft = Work_Time;
+  } else {
+    onBreak = true;
+    state = "paused"; 
+    timeLeft = Break_Time;
   }
 
   updateUI();
-  updateButtons();
+  setSwitchBtnUI("Start");
 }
