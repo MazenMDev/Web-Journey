@@ -82,7 +82,7 @@ function setSwitchBtnUI(text) {
     switchBtn.style.transform = "translateY(0)";
   } else {
     switchBtn.style.boxShadow = "0 5px 5px var(--secondry)";
-    switchBtn.style.transform = "translateY(-2px)";
+    switchBtn.style.transform = "translateY(-6px)";
   }
 }
 

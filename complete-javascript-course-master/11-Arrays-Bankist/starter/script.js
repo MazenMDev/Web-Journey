@@ -65,7 +65,34 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // LECTURES
 
+function displayMovements(movements) {
+  containerMovements.innerHTML = '';
+
+  movements.forEach((mov, i) => {
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+    const html = `
+      <div class="movements__row">
+        <div class="movements__type movements__type--${type}">${
+      i + 1
+    } ${type}</div>
+        <div class="movements__value">${mov}€</div>
+      </div>
+    `;
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+}
+displayMovements(account1.movements);
+
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const user = 'Steven Thomas Williams'; // stw
+const username = user
+  .toLowerCase()
+  .split(' ')
+  .map(name => name[0])
+  .join('');
+console.log(username);
 
 /////////////////////////////////////////////////
 
@@ -154,3 +181,71 @@ console.log(currenciesUnique);
 currenciesUnique.forEach(function (value, _, map) {
   console.log(`${value}: ${value}`);
 });
+
+// Coding Challenge #1
+console.log('----- Coding Challenge #1 -----');
+
+function checkDogs(dogsJulia, dogsKate) {
+  const dogsJuliaCorrected = [...dogsJulia]; // shallow copy
+  dogsJuliaCorrected.splice(0, 1);
+  dogsJuliaCorrected.splice(-2);
+
+  const allDogs = dogsJuliaCorrected.concat(dogsKate);
+
+  allDogs.forEach((dog, i) => {
+    if (dog >= 3) {
+      console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
+    } else {
+      console.log(`Dog number ${i + 1} is still a puppy 🐶`);
+    }
+  });
+}
+console.log('---test data 1---');
+checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
+console.log('---test data 2---');
+checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
+
+// map method
+
+const eurToUsd = 1.1;
+
+// 1. using arrow function
+const movementsUSD = movements.map(mov => Math.round(mov * eurToUsd));
+console.log(movements);
+console.log(movementsUSD);
+
+// 2. using for loop
+const movementsUSDfor = [];
+for (const mov of movements) movementsUSDfor.push(Math.round(mov * eurToUsd));
+console.log(movementsUSDfor);
+
+// 3. using map with function declaration
+const movementsDescriptions = movements.map(
+  (mov, i) =>
+    `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(
+      mov
+    )}`
+);
+
+console.log(movementsDescriptions);
+
+// filter method
+const deposits = movements.filter(mov => mov > 0);
+console.log(movements);
+console.log(deposits);
+
+const withdrawals = movements.filter(mov => mov < 0);
+console.log(withdrawals);
+
+// reduce method
+console.log('------------');
+const balance = movements.reduce(
+  (current, most) => (current > most ? current : most),
+  movements[0]
+);
+console.log(balance);
+console.log(movements[0]);
+
+let balance2 = 0;
+for (const mov of movements) balance2 += mov; // balance2 = balance2 + mov
+console.log(balance2);
