@@ -90,6 +90,7 @@ h1 {
   box-shadow: 0 5px 5px var(--secondry);
   width: 200px;
   padding: 20px 60px;
+  transform: translateY(-6px);
 }
 
 #reset {

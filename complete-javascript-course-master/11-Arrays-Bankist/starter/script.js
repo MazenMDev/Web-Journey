@@ -72,19 +72,25 @@ function displayMovements(movements) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
-      <div class="movements__row">
-        <div class="movements__type movements__type--${type}">${
-      i + 1
-    } ${type}</div>
+    <div class="movements__row">
+    <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
         <div class="movements__value">${mov}€</div>
       </div>
-    `;
+      `;
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 }
 displayMovements(account1.movements);
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// Displaying movements
+const calcPrintBalance = function (movements) {
+  return movements.reduce((sum, curr) => sum + curr, 0);
+};
+console.log('total is: ', calcPrintBalance(movements));
+
+labelBalance.textContent = `${calcPrintBalance(account1.movements)} EUR`;
 
 const user = 'Steven Thomas Williams'; // stw
 const username = user
@@ -239,13 +245,50 @@ console.log(withdrawals);
 
 // reduce method
 console.log('------------');
-const balance = movements.reduce(
-  (current, most) => (current > most ? current : most),
-  movements[0]
-);
+const balance = movements.reduce((current, most) => {
+  console.log('Current:', current, 'Most:', most);
+  return current > most ? current : most;
+}, movements[0]);
 console.log(balance);
 console.log(movements[0]);
 
 let balance2 = 0;
 for (const mov of movements) balance2 += mov; // balance2 = balance2 + mov
 console.log(balance2);
+
+// Challenge #2
+console.log('----- Coding Challenge #2 -----');
+
+function calcDogAge(dogsJulia, dogsKate) {
+  const juliaDogs = [...dogsJulia];
+  juliaDogs.slice(0, 1);
+  juliaDogs.slice(-2);
+
+  const allDogs = juliaDogs.concat(dogsKate);
+  console.log('all dogs: ', allDogs);
+
+  // 1. map to get dog ages in human years
+  const dogAges = allDogs.map((dog, i) => {
+    return dog <= 2 ? 2 * dog : 16 + dog * 4;
+  });
+  console.log(dogAges);
+
+  // 2. filter to get adult dogs
+  const adultDogs = allDogs.filter(dog => dog >= 18); //
+  console.log("Adult dogs' ages:");
+  console.log(adultDogs);
+
+  // 3. reduce to get average age of adult dogs
+  const adultDogAges = adultDogs.map((dog, i) => {
+    return dog <= 2 ? 2 * dog : 16 + dog * 4;
+  });
+  console.log('Adult dogs ages in human years:', adultDogAges);
+
+  const averageAge =
+    adultDogAges.reduce((acc, age) => acc + age, 0) / adultDogAges.length;
+  console.log('Average age of adult dogs:', averageAge);
+}
+console.log('---test data 1---');
+calcDogAge([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
+console.log('---test data 2---');
+calcDogAge([9, 16, 6, 8, 3], [20, 5, 6, 1, 4]);
