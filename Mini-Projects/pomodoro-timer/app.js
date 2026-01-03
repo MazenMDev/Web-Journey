@@ -22,6 +22,7 @@ let Work_Time = 25 * 60;
 let Break_Time = 5 * 60;
 
 let countDown = null;
+let endTime = null;
 
 let sessionsToday = 0;
 let stats = {};
@@ -88,6 +89,7 @@ function setSwitchBtnUI(text) {
 
 function startTimer() {
   if (countDown) return;
+  endTime = Date.now() + timeLeft * 1000;
 
   if (state === "idle") {
     state = "work";
@@ -99,7 +101,7 @@ function startTimer() {
 }
 
 function updateTimer() {
-  timeLeft--;
+  timeLeft = Math.round((endTime - Date.now()) / 1000);
 
   if (timeLeft <= 0) {
     clearInterval(countDown);
@@ -113,6 +115,7 @@ function updateTimer() {
 
 function pauseTimer() {
   if (!countDown) return;
+  timeLeft = Math.round((endTime - Date.now()) / 1000); 
   clearInterval(countDown);
   countDown = null;
   state = "paused";
