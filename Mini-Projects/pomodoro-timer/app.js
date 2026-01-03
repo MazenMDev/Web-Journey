@@ -94,8 +94,11 @@ function setSwitchBtnUI(text) {
   if (text === "Pause") {
     switchBtn.style.boxShadow = "none";
     switchBtn.style.transform = "translateY(0)";
-  } else {
+  } else if (text === "Start" && !onBreak) {
     switchBtn.style.boxShadow = "0 5px 5px var(--secondry)";
+    switchBtn.style.transform = "translateY(-6px)";
+  } else {
+    switchBtn.style.boxShadow = "0 5px 5px var(--accent)";
     switchBtn.style.transform = "translateY(-6px)";
   }
 }
@@ -173,11 +176,13 @@ function handleEndSession() {
     state = "idle";
     timeLeft = Work_Time;
     endSessionSound.play();
+    document.body.classList.remove("break-mode");
   } else {
     onBreak = true;
     state = "paused";
     timeLeft = Break_Time;
     endWorkSound.play();
+    document.body.classList.add("break-mode");
   }
 
   updateUI();
