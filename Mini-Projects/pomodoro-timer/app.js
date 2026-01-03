@@ -1,18 +1,25 @@
-const timer = document.getElementById("timer");
-const switchBtn = document.getElementById("switch-btn");
-const reset = document.getElementById("reset");
-const sessionsNumber = document.querySelector(".number-sessions span");
-const progressBar = document.getElementById("progress-bar");
+// Buttons
 const lastWeekBtn = document.getElementById("last-week-stats");
-const containerLastWeek = document.querySelector(".container-lastWeek");
-const editBtn = document.getElementById("customize-btn");
-const overlay = document.getElementById("overlay");
-const containerCustomize = document.querySelector(".customization-container");
+const switchBtn = document.getElementById("switch-btn");
 const saveBtn = document.getElementById("save-customization");
 const closeBtn = document.getElementById("close-customization");
+const editBtn = document.getElementById("customize-btn");
+// Containers
+const containerLastWeek = document.querySelector(".container-lastWeek");
+const containerCustomize = document.querySelector(".customization-container");
+// Inputs
+const workInput = document.getElementById("work-duration");
+const breakInput = document.getElementById("break-duration");
+// Sounds
 const clickSound = new Audio("./sounds/click.wav");
 const endWorkSound = new Audio("./sounds/end_work.wav");
 const endSessionSound = new Audio("./sounds/end_session.mp3");
+// Other elements
+const timer = document.getElementById("timer");
+const overlay = document.getElementById("overlay");
+const reset = document.getElementById("reset");
+const sessionsNumber = document.querySelector(".number-sessions span");
+const progressBar = document.getElementById("progress-bar");
 
 let timeLeft = 1500;
 let state = "idle"; // idle, work, paused
@@ -49,15 +56,16 @@ editBtn.addEventListener("click", customizeSession);
 function customizeSession() {
   containerCustomize.classList.add("show");
   overlay.style.display = "block";
+  workInput.focus();
 
   saveBtn.addEventListener("click", () => {
-    const workInput = document.getElementById("work-duration").value;
-    const breakInput = document.getElementById("break-duration").value;
-    if (workInput > 0) {
-      Work_Time = workInput * 60;
+    const workDuration = parseInt(workInput.value);
+    const breakDuration = parseInt(breakInput.value);
+    if (workDuration > 0) {
+      Work_Time = workDuration * 60;
     }
-    if (breakInput > 0) {
-      Break_Time = breakInput * 60;
+    if (breakDuration > 0) {
+      Break_Time = breakDuration * 60;
     }
     resetTimer();
     containerCustomize.classList.remove("show");
@@ -206,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
   today = getTodayDate();
   if (stats[today]) {
     sessionsToday = stats[today].sessions;
-  } else { 
+  } else {
     stats[today] = {
       sessions: 0,
       workMinutes: 0,
