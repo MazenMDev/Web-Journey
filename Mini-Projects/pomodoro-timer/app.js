@@ -20,20 +20,23 @@ const overlay = document.getElementById("overlay");
 const reset = document.getElementById("reset");
 const sessionsNumber = document.querySelector(".number-sessions span");
 const progressBar = document.getElementById("progress-bar");
+const title = document.querySelector("title");
 
-let timeLeft = 1500;
+// Timer variables
+let Work_Time = 25 * 60;
+let Break_Time = 5 * 60;
+let timeLeft = Work_Time;
 let state = "idle"; // idle, work, paused
 let onBreak = false;
 
-let Work_Time = 25 * 60;
-let Break_Time = 5 * 60;
-
+// Timer interval
 let countDown = null;
 let endTime = null;
 
-let sessionsToday = 0;
+// Stats variables
 let stats = {};
 let today = getTodayDate();
+let sessionsToday = 0;
 
 switchBtn.addEventListener("click", () => {
   clickSound.play();
@@ -112,6 +115,11 @@ function startTimer() {
 
 function updateTimer() {
   timeLeft = Math.round((endTime - Date.now()) / 1000);
+  title.textContent = `(${Math.floor(timeLeft / 60)
+    .toString()
+    .padStart(2, "0")}:${(timeLeft % 60)
+    .toString()
+    .padStart(2, "0")}) Pomodoro Timer`;
 
   if (timeLeft <= 0) {
     clearInterval(countDown);
