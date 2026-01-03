@@ -62,6 +62,8 @@ function customizeSession() {
     resetTimer();
     containerCustomize.classList.remove("show");
     overlay.style.display = "none";
+    localStorage.setItem("customWorkTime", Work_Time);
+    localStorage.setItem("customBreakTime", Break_Time);
     alert("Customization Saved!");
   });
 
@@ -115,7 +117,7 @@ function updateTimer() {
 
 function pauseTimer() {
   if (!countDown) return;
-  timeLeft = Math.round((endTime - Date.now()) / 1000); 
+  timeLeft = Math.round((endTime - Date.now()) / 1000);
   clearInterval(countDown);
   countDown = null;
   state = "paused";
@@ -189,13 +191,22 @@ function getTodayDate() {
 
 document.addEventListener("DOMContentLoaded", () => {
   const savedStats = localStorage.getItem("pomodoroStats");
+  const customWorkTime = localStorage.getItem("customWorkTime");
+  const customBreakTime = localStorage.getItem("customBreakTime");
   if (savedStats) {
     stats = JSON.parse(savedStats);
+  }
+  if (customWorkTime) {
+    Work_Time = parseInt(customWorkTime);
+    timeLeft = Work_Time;
+  }
+  if (customBreakTime) {
+    Break_Time = parseInt(customBreakTime);
   }
   today = getTodayDate();
   if (stats[today]) {
     sessionsToday = stats[today].sessions;
-  } else {
+  } else { 
     stats[today] = {
       sessions: 0,
       workMinutes: 0,
