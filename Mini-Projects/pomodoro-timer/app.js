@@ -56,6 +56,21 @@ reset.addEventListener("click", resetTimer);
 lastWeekBtn.addEventListener("click", getLastWeekStats);
 editBtn.addEventListener("click", customizeSession);
 
+document.addEventListener("keydown", (e) => {
+  if (e.target.tagName === "INPUT") return;
+
+  switch (e.code) {
+    case "Space":
+      e.preventDefault();
+      switchBtn.click();
+      break;
+
+    case "KeyR":
+      reset.click();
+      break;
+  }
+});
+
 function customizeSession() {
   containerCustomize.classList.add("show");
   overlay.style.display = "block";
