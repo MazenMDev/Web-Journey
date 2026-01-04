@@ -92,6 +92,29 @@ console.log('total is: ', calcPrintBalance(movements));
 
 labelBalance.textContent = `${calcPrintBalance(account1.movements)} EUR`;
 
+function calcDisplaySummary(movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes} EUR`; // total deposits 
+
+  const out = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${Math.abs(out)} EUR`; // total withdrawals
+
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * 1.2) / 100) // interest rate 1.2%
+    .filter((int, i, arr) => {
+      // console.log(arr);
+      return int >= 1; 
+    })
+    .reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `${interest} EUR`; // total interest
+}
+calcDisplaySummary(account1.movements);
+
 const user = 'Steven Thomas Williams'; // stw
 const username = user
   .toLowerCase()
@@ -292,3 +315,16 @@ console.log('---test data 1---');
 calcDogAge([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
 console.log('---test data 2---');
 calcDogAge([9, 16, 6, 8, 3], [20, 5, 6, 1, 4]);
+
+const euroToUsd = 1.1;
+const totalDepositsUSD = movements
+  .filter(mov => mov > 0)
+  .map(mov => mov * euroToUsd)
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log('Total Deposits in USD:', Math.round(totalDepositsUSD));
+
+// Find method
+const firstWithdrawal = movements.find(mov => mov < 0); // returns the first element that matches the condition
+console.log(movements);
+console.log('firstWithdrawal:', firstWithdrawal);
