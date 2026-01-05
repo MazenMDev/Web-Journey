@@ -10,6 +10,7 @@ const containerCustomize = document.querySelector(".customization-container");
 // Inputs
 const workInput = document.getElementById("work-duration");
 const breakInput = document.getElementById("break-duration");
+const longBreakInput = document.getElementById("long-break-duration");
 // Sounds
 const clickSound = new Audio("./sounds/click.wav");
 const endWorkSound = new Audio("./sounds/end_work.wav");
@@ -25,9 +26,13 @@ const title = document.querySelector("title");
 // Timer variables
 let Work_Time = 25 * 60;
 let Break_Time = 5 * 60;
+let Long_Break_Time = 15 * 60;
+let count = 0;
+let tracker = 4; // Number of work sessions before a long break
 let timeLeft = Work_Time;
 let state = "idle"; // idle, work, paused
 let onBreak = false;
+let onLongBreak = false;
 
 // Timer interval
 let countDown = null;
@@ -79,17 +84,22 @@ function customizeSession() {
   saveBtn.addEventListener("click", () => {
     const workDuration = parseInt(workInput.value);
     const breakDuration = parseInt(breakInput.value);
+    const longBreakDuration = parseInt(longBreakInput.value);
     if (workDuration > 0) {
       Work_Time = workDuration * 60;
     }
     if (breakDuration > 0) {
       Break_Time = breakDuration * 60;
     }
+    if (longBreakDuration > 0) {
+      Long_Break_Time = longBreakDuration * 60;
+    }
     resetTimer();
     containerCustomize.classList.remove("show");
     overlay.style.display = "none";
     localStorage.setItem("customWorkTime", Work_Time);
     localStorage.setItem("customBreakTime", Break_Time);
+    localStorage.setItem("customLongBreakTime", Long_Break_Time);
     alert("Customization Saved!");
   });
 
@@ -120,19 +130,19 @@ function setSwitchBtnUI(text) {
 
 function startTimer() {
   if (countDown) return;
-  endTime = Date.now() + timeLeft * 1000;
+  endTime = Date.now() + timeLeft * 10;
 
-  if (state === "idle") {
+  if (state === "idle" && !onBreak) {
     state = "work";
     timeLeft = Work_Time;
   }
 
-  countDown = setInterval(updateTimer, 1000);
+  countDown = setInterval(updateTimer, 10);
   updateUI();
 }
 
 function updateTimer() {
-  timeLeft = Math.round((endTime - Date.now()) / 1000);
+  timeLeft = Math.round((endTime - Date.now()) / 10);
   title.textContent = `(${Math.floor(timeLeft / 60)
     .toString()
     .padStart(2, "0")}:${(timeLeft % 60)
@@ -140,6 +150,9 @@ function updateTimer() {
     .padStart(2, "0")}) Pomodoro Timer`;
 
   if (timeLeft <= 0) {
+    if (onLongBreak) {
+      onLongBreak = false;
+    }
     clearInterval(countDown);
     countDown = null;
     handleEndSession();
@@ -151,19 +164,18 @@ function updateTimer() {
 
 function pauseTimer() {
   if (!countDown) return;
-  timeLeft = Math.round((endTime - Date.now()) / 1000);
+  timeLeft = Math.round((endTime - Date.now()) / 10);
   clearInterval(countDown);
   countDown = null;
   state = "paused";
 }
 
 function resetTimer() {
+  progressBar.style.width = "0%";
   clearInterval(countDown);
   countDown = null;
 
-  state = "idle";
-  onBreak = false;
-  timeLeft = Work_Time;
+  timeLeft = onLongBreak ? Long_Break_Time : onBreak ? Break_Time : Work_Time;
 
   updateUI();
   setSwitchBtnUI("Start");
@@ -177,7 +189,12 @@ function updateUI() {
     seconds
   ).padStart(2, "0")}`;
 
-  let totalTime = onBreak ? Break_Time : Work_Time;
+  const totalTime = onLongBreak
+    ? Long_Break_Time
+    : onBreak
+    ? Break_Time
+    : Work_Time;
+
   let progressPercent = ((totalTime - timeLeft) / totalTime) * 100;
   progressBar.style.width = progressPercent + "%";
 
@@ -192,12 +209,19 @@ function handleEndSession() {
     timeLeft = Work_Time;
     endSessionSound.play();
     document.body.classList.remove("break-mode");
+    count++;
   } else {
     onBreak = true;
     state = "paused";
     timeLeft = Break_Time;
     endWorkSound.play();
     document.body.classList.add("break-mode");
+  }
+
+  if (count === tracker) {
+    count = 0;
+    longBreak();
+    onLongBreak = true;
   }
 
   updateUI();
@@ -225,33 +249,6 @@ function getTodayDate() {
   return new Date().toISOString().split("T")[0];
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const savedStats = localStorage.getItem("pomodoroStats");
-  const customWorkTime = localStorage.getItem("customWorkTime");
-  const customBreakTime = localStorage.getItem("customBreakTime");
-  if (savedStats) {
-    stats = JSON.parse(savedStats);
-  }
-  if (customWorkTime) {
-    Work_Time = parseInt(customWorkTime);
-    timeLeft = Work_Time;
-  }
-  if (customBreakTime) {
-    Break_Time = parseInt(customBreakTime);
-  }
-  today = getTodayDate();
-  if (stats[today]) {
-    sessionsToday = stats[today].sessions;
-  } else {
-    stats[today] = {
-      sessions: 0,
-      workMinutes: 0,
-    };
-  }
-
-  updateUI();
-});
-
 function getLastWeekStats() {
   const todayDate = new Date();
   let lastWeekStats = [];
@@ -274,7 +271,6 @@ function getLastWeekStats() {
       });
     }
   }
-  console.log("Last Week Stats:", lastWeekStats);
   showLastWeekStats(lastWeekStats);
 }
 
@@ -309,3 +305,50 @@ function showLastWeekStats(lastWeekStats) {
     overlay.style.display = "none";
   });
 }
+
+function longBreak() {
+  if (onBreak) return;
+  pauseTimer();
+  onBreak = true;
+  timeLeft = Long_Break_Time;
+  updateUI();
+  setSwitchBtnUI("Start");
+  document.body.classList.add("break-mode");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const savedStats = localStorage.getItem("pomodoroStats");
+  const customWorkTime = localStorage.getItem("customWorkTime");
+  const customBreakTime = localStorage.getItem("customBreakTime");
+  const customLongBreakTime = localStorage.getItem("customLongBreakTime");
+  if (savedStats) {
+    stats = JSON.parse(savedStats);
+  }
+  if (customWorkTime) {
+    Work_Time = parseInt(customWorkTime);
+    timeLeft = Work_Time;
+  }
+  if (customBreakTime) {
+    Break_Time = parseInt(customBreakTime);
+  }
+  if (customLongBreakTime) {
+    Long_Break_Time = parseInt(customLongBreakTime);
+  }
+  today = getTodayDate();
+  if (stats[today]) {
+    sessionsToday = stats[today].sessions;
+  } else {
+    stats[today] = {
+      sessions: 0,
+      workMinutes: 0,
+    };
+  }
+
+  updateUI();
+});
+
+// Prevent accidental tab closure
+window.addEventListener("beforeunload", (e) => {
+  e.preventDefault();
+  e.returnValue = "";
+});
