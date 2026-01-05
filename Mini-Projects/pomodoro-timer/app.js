@@ -130,19 +130,19 @@ function setSwitchBtnUI(text) {
 
 function startTimer() {
   if (countDown) return;
-  endTime = Date.now() + timeLeft * 10;
+  endTime = Date.now() + timeLeft * 1000;
 
   if (state === "idle" && !onBreak) {
     state = "work";
     timeLeft = Work_Time;
   }
 
-  countDown = setInterval(updateTimer, 10);
+  countDown = setInterval(updateTimer, 1000);
   updateUI();
 }
 
 function updateTimer() {
-  timeLeft = Math.round((endTime - Date.now()) / 10);
+  timeLeft = Math.round((endTime - Date.now()) / 1000);
   title.textContent = `(${Math.floor(timeLeft / 60)
     .toString()
     .padStart(2, "0")}:${(timeLeft % 60)
@@ -164,7 +164,7 @@ function updateTimer() {
 
 function pauseTimer() {
   if (!countDown) return;
-  timeLeft = Math.round((endTime - Date.now()) / 10);
+  timeLeft = Math.round((endTime - Date.now()) / 1000);
   clearInterval(countDown);
   countDown = null;
   state = "paused";
