@@ -115,6 +115,25 @@ btnTransfer.addEventListener('click', e => {
   }
 });
 
+btnClose.addEventListener('click', e => {
+  e.preventDefault();
+  console.log('trigger');
+  console.log(inputClosePin.value, inputCloseUsername.value);
+
+  if (
+    Number(inputClosePin.value) === currentAccount.pin &&
+    inputCloseUsername.value === currentAccount.username
+  ) {
+    const indexCloseAccount = accounts.findIndex(acc => acc === currentAccount);
+    accounts.splice(indexCloseAccount, 1);
+    containerApp.style.opacity = 0;
+  }
+
+  inputClosePin.value = inputCloseUsername.value = '';
+  if (document.activeElement === inputClosePin) inputClosePin.blur();
+  if (document.activeElement === inputCloseUsername) inputCloseUsername.blur();
+});
+
 function updateUI(currAcc) {
   calcDisplaySummary(currAcc);
   displayMovements(currAcc.movements);
