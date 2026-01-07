@@ -291,7 +291,7 @@ function showLastWeekStats(lastWeekStats) {
     <span class="best-day">Best Day: 
       ${
         lastWeekStats.reduce((best, current) =>
-          current.sessions > best.sessions ? current : best
+          current.workMinutes > best.workMinutes ? current : best
         ).date
       }
     </span>
