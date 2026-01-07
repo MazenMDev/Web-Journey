@@ -115,6 +115,19 @@ btnTransfer.addEventListener('click', e => {
   }
 });
 
+btnLoan.addEventListener('click', e => {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    currentAccount.movements.push(amount);
+
+    updateUI(currentAccount);
+  }
+  inputLoanAmount.value = '';
+  if (document.activeElement === inputLoanAmount) inputLoanAmount.blur();
+});
+
 btnClose.addEventListener('click', e => {
   e.preventDefault();
   console.log('trigger');
@@ -431,3 +444,47 @@ for (let acc of accounts) {
     console.log(acc);
   }
 }
+console.log('-------------');
+// findLast
+const firstWithdrawalLast = movements.findLast(mov => mov < 0);
+console.log('firstWithdrawalLast:', firstWithdrawalLast);
+// findLastIndex
+const firstWithdrawalLastIndex = movements.findLastIndex(mov => mov < 0);
+console.log('firstWithdrawalLastIndex:', firstWithdrawalLastIndex);
+
+// some and every
+console.log(movements.includes(-130)); // true
+
+const anyDeposits = movements.some(mov => mov > 1500);
+console.log('anyDeposits:', anyDeposits);
+
+const allDeposits = movements.every(mov => mov > 0);
+console.log('allDeposits:', allDeposits);
+
+// separate callback
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+console.log(movements.every(deposit));
+console.log(movements.filter(deposit));
+
+// flat and flatMap
+const arrDeep = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arrDeep.flat()); // [1,2,3,4,5,6,7,8]
+
+const arrDeep2 = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep2.flat(2)); // [1,2,3,4,5,6,7,8]
+
+// flat on movements
+const overalBalance = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log('overalBalance:', overalBalance);
+
+// flatMap
+const overalBalance2 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log('overalBalance2:', overalBalance2);
+console.log('-----------------------');
+
