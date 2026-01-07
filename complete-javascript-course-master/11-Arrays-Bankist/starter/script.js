@@ -147,6 +147,19 @@ btnClose.addEventListener('click', e => {
   if (document.activeElement === inputCloseUsername) inputCloseUsername.blur();
 });
 
+let sortedState = ['default', 'ascending', 'descending'];
+let index = 0;
+btnSort.addEventListener('click', e => {
+  e.preventDefault();
+
+  index = (index + 1) % sortedState.length;
+  let state = sortedState[index];
+  displayMovements(currentAccount.movements, state);
+  console.log(state);
+});
+// displayMovements(currentAccount.movements, !sorted);
+// sorted = !sorted;
+
 function updateUI(currAcc) {
   calcDisplaySummary(currAcc);
   displayMovements(currAcc.movements);
@@ -157,18 +170,26 @@ function updateUI(currAcc) {
 /////////////////////////////////////////////////
 // LECTURES
 
-function displayMovements(movements) {
+function displayMovements(movements, state = 'default') {
+  let movs;
+  if (state === 'default') movs = movements;
+  else if (state === 'descending') // from large to small
+    movs = movements.slice().sort((a, b) => a - b); // a -b because of insertAdjacentHTML 'afterbegin' (reverse order)
+  else if (state === 'ascending') // from small to large
+    movs = movements.slice().sort((a, b) => b - a);
+
   containerMovements.innerHTML = '';
-
-  movements.forEach((mov, i) => {
+  movs.forEach((mov, i) => {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
-
     const html = `
-    <div class="movements__row">
-    <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
+      <div class="movements__row">
+        <div class="movements__type movements__type--${type}">${
+      i + 1
+    } ${type}</div>
         <div class="movements__value">${mov}€</div>
       </div>
-      `;
+    `;
+
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 }
@@ -590,3 +611,14 @@ const breedWithFetch = breeds
 console.log(breedWithFetch);
 const heaviestFetchBreed = Math.max(...breedWithFetch);
 console.log(heaviestFetchBreed);
+
+const owners = ['Jonas', 'Zek', 'Mazen', 'Adam'];
+console.log(owners.sort());
+// sort mutates the original array
+console.log(owners);
+
+console.log(movements);
+// console.log(movements.sort());
+
+console.log(movements.sort((a, b) => a - b)); // from small to large
+console.log(movements.sort((a, b) => b - a));
