@@ -10,6 +10,7 @@ const account1 = {
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
   interestRate: 1.2, // %
   pin: 1111,
+  type: 'standard',
 };
 
 const account2 = {
@@ -17,6 +18,7 @@ const account2 = {
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
   interestRate: 1.5,
   pin: 2222,
+  type: 'premium',
 };
 
 const account3 = {
@@ -24,6 +26,7 @@ const account3 = {
   movements: [200, -200, 340, -300, -20, 50, 400, -460],
   interestRate: 0.7,
   pin: 3333,
+  type: 'standard',
 };
 
 const account4 = {
@@ -31,6 +34,7 @@ const account4 = {
   movements: [430, 1000, 700, 50, 90],
   interestRate: 1,
   pin: 4444,
+  type: 'basic',
 };
 
 const accounts = [account1, account2, account3, account4];
@@ -173,9 +177,12 @@ function updateUI(currAcc) {
 function displayMovements(movements, state = 'default') {
   let movs;
   if (state === 'default') movs = movements;
-  else if (state === 'descending') // from large to small
-    movs = movements.slice().sort((a, b) => a - b); // a -b because of insertAdjacentHTML 'afterbegin' (reverse order)
-  else if (state === 'ascending') // from small to large
+  else if (state === 'descending')
+    // from large to small
+    movs = movements.slice().sort((a, b) => a - b);
+  // a -b because of insertAdjacentHTML 'afterbegin' (reverse order)
+  else if (state === 'ascending')
+    // from small to large
     movs = movements.slice().sort((a, b) => b - a);
 
   containerMovements.innerHTML = '';
@@ -622,3 +629,155 @@ console.log(movements);
 
 console.log(movements.sort((a, b) => a - b)); // from small to large
 console.log(movements.sort((a, b) => b - a));
+
+// Group By
+console.log(movements);
+const groupedMovements = Object.groupBy(movements, mov =>
+  mov > 0 ? 'deposit' : 'withdrawl'
+);
+console.log(groupedMovements);
+
+const groupByActivity = Object.groupBy(accounts, acc => {
+  const movementCount = acc.movements.length;
+
+  if (movementCount >= 8) return 'high';
+  else if (movementCount >= 4) return 'medium';
+  else return 'low';
+});
+console.log(groupByActivity);
+
+console.log('-----------------------');
+// const groupByType = Object.groupBy(accounts, acc => acc.type);
+// console.log(groupByType);
+
+const groupByType = Object.groupBy(accounts, ({ type }) => type);
+console.log(groupByType);
+
+// Filling arrays
+const arr1 = [1, 2, 3, 4, 5, 6, 7];
+arr1.fill(0, 2, 5); // fill with 0 from index 2 to < 5
+console.log(arr1);
+
+const x = new Array(7);
+x.fill(1, 3, 7);
+console.log(x);
+
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y);
+
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
+console.log(z);
+
+const w = Array.from(
+  { length: 100 },
+  () => Math.trunc(Math.random() * 100) + 1
+); // random numbers between 1 and 100
+console.log(w);
+
+// Array.from method to extract movements from DOM
+labelBalance.addEventListener('click', function () {
+  let movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', ''))
+  );
+  console.log(movementsUI);
+
+  const movementsUI2 = [...document.querySelectorAll('.movements__value')];
+  movementsUI2 = movementsUI2.map(el =>
+    Number(el.textContent.replace('€', ''))
+  );
+  console.log(movementsUI2);
+});
+
+// Non-destructive methods (do not mutate the original array)
+// slice, concat, map, filter, reduce, flat, flatMap, find, findLast, findLastIndex, some, every, includes, join, toSorted, toReversed, toSpliced, with
+const arrN = [5, 2, 4, 1, 15, 8, 3];
+console.log(arrN);
+const sortedArrNAsc = arrN.slice().sort((a, b) => a - b);
+console.log(sortedArrNAsc);
+const sortedArrNDesc = arrN.slice().sort((a, b) => b - a);
+console.log(sortedArrNDesc);
+console.log(arrN);
+
+// toSorted method
+const sortedArrNAsc2 = arrN.toSorted((a, b) => a - b);
+console.log(sortedArrNAsc2);
+const sortedArrNDesc2 = arrN.toSorted((a, b) => b - a);
+console.log(sortedArrNDesc2);
+console.log(arrN);
+
+// toReversed method
+const reversedArrN = arrN.toReversed();
+console.log(reversedArrN);
+console.log(arrN);
+
+// toSpliced method
+const splicedArrN = arrN.toSpliced(2, 3); // from index 2 delete 3 elements
+console.log(splicedArrN);
+console.log(arrN);
+
+const splicedArrN2 = arrN.toSpliced(2, 0, 99, 100); // from index 2 delete 0 elements and add 99 and 100
+console.log(splicedArrN2);
+console.log(arrN);
+
+// toSorted + toSpliced chaining
+const sortedAndSpliced = arrN
+  .toSpliced(2, 3, 99, 100)
+  .toSorted((a, b) => a - b);
+console.log(sortedAndSpliced);
+console.log(arrN);
+
+const newMovements = movements.with(1, 2000); // add 2000 to the end
+console.log(newMovements);
+console.log(movements);
+
+// mutable methods (mutate the original array)
+// splice, reverse, sort, fill, push, pop, shift, unshift
+
+const totalDeposits = accounts
+  .flatMap(ac => ac.movements)
+  .filter(mov => mov > 0)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(totalDeposits);
+
+// const numDeposits1000 = accounts
+//   .flatMap(ac => ac.movements)
+//   .filter(mov => mov >= 1000).length;
+// console.log(numDeposits1000);
+
+const numDeposits1000 = accounts
+  .flatMap(ac => ac.movements)
+  .reduce((counter, mov) => (mov >= 1000 ? ++counter : counter), 0);
+console.log(numDeposits1000);
+
+const sum = accounts
+  .flatMap(ac => ac.movements)
+  .reduce(
+    (sum, mov) => {
+      // mov > 0 ? sum.deposits += mov : sum.withdrawals += mov;
+      sum[mov > 0 ? 'deposits' : 'withdrawals'] += mov;
+      return sum;
+    },
+    {
+      deposits: 0,
+      withdrawals: 0,
+    }
+  );
+console.log(sum.deposits, sum.withdrawals);
+
+const convertTitleCase = function (title) {
+  const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => {
+      if (!exceptions.includes(word))
+        return word[0].toUpperCase() + word.slice(1);
+      return word;
+    })
+    .join(' ');
+
+  console.log(titleCase);
+};
+convertTitleCase('this is a title');
